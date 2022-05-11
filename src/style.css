@@ -1,0 +1,39 @@
+@charset "UTF-8";
+* {
+  font-family: "Noto Sans KR";
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  display: flex;
+  border-bottom: 0.5px solid #bbbbbb;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.header-btn {
+  background-color: white;
+  border: none;
+  padding: 10px;
+}
+.header-btn:hover {
+  color: rgb(120, 120, 120);
+}
+
+.header-items {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+}
+
+/* for smartphone: ~ 480px */
+/*
+visibility : hidden -> display:none은 공간까지 사라지게 하지만 이것은 공간은 사라지지 않고 남는다.
+opacity : 투명도 지정 0.0~1.0
+ */
+
+/*# sourceMappingURL=style.css.map */
