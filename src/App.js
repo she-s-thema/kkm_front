@@ -1,12 +1,15 @@
 import './style.css';
 import React from 'react'
 import Header from './components/Header';
+import SignUp from './components/SignUp';
 
 export default function App() {
   return (
     <div className='App'>
       <Header />
-      <p id='p'>h</p>
+      <div className='main-content'>
+        <SignUp />
+      </div>
     </div>
   );
 }

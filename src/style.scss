@@ -1,5 +1,4 @@
 $gray:#bbbbbb;
-$entire-margin: 150px;
 
 * {
     font-family: 'Noto Sans KR';
@@ -7,7 +6,13 @@ $entire-margin: 150px;
     padding: 0;
 }
 
+body {
+    background-color: #f3f3f3;
+    height: 100%;
+}
+
 .header {
+    position: fixed;
     width: 100%;
     height: 40px;
     background-color: white;
@@ -30,6 +35,55 @@ $entire-margin: 150px;
     width: 60%;
     display: flex;
     justify-content: center;
+}
+
+.main-content {
+    padding-top: 40px;
+}
+
+.signup-content {
+    margin: auto;
+    width: 480px;
+    height: 100vh;
+    background-color: white;
+    justify-content: center;
+}
+
+.signup-form {
+    padding: 0 20%;
+    .logo-with-text {
+        display: block;
+        margin: 0 auto;
+        padding-top: 20%;
+    }
+    form {
+        margin-top: 70px;
+    }
+    .input-box {
+        display: block;
+        margin-bottom: 24px;
+        input {
+            border: none;
+            border-bottom: 0.5px solid #AFBEDF;
+            padding: 8px;
+            font-size: 12px;
+        }
+        button {
+            color: white;
+            border: none;
+            background-color: #AFBEDF;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .signup-input {
+            display: flexbox;
+            flex-grow: 1;
+        }
+    }
+}
+
+.max-width {
+    width: 100%;
 }
 
 /* for smartphone: ~ 480px */

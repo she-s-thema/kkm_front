@@ -5,7 +5,13 @@
   padding: 0;
 }
 
+body {
+  background-color: #f3f3f3;
+  height: 100%;
+}
+
 .header {
+  position: fixed;
   width: 100%;
   height: 40px;
   background-color: white;
@@ -28,6 +34,55 @@
   width: 60%;
   display: flex;
   justify-content: center;
+}
+
+.main-content {
+  padding-top: 40px;
+}
+
+.signup-content {
+  margin: auto;
+  width: 480px;
+  height: 100vh;
+  background-color: white;
+  justify-content: center;
+}
+
+.signup-form {
+  padding: 0 20%;
+}
+.signup-form .logo-with-text {
+  display: block;
+  margin: 0 auto;
+  padding-top: 20%;
+}
+.signup-form form {
+  margin-top: 70px;
+}
+.signup-form .input-box {
+  display: block;
+  margin-bottom: 24px;
+}
+.signup-form .input-box input {
+  border: none;
+  border-bottom: 0.5px solid #AFBEDF;
+  padding: 8px;
+  font-size: 12px;
+}
+.signup-form .input-box button {
+  color: white;
+  border: none;
+  background-color: #AFBEDF;
+  padding: 8px;
+  border-radius: 4px;
+}
+.signup-form .input-box .signup-input {
+  display: flexbox;
+  flex-grow: 1;
+}
+
+.max-width {
+  width: 100%;
 }
 
 /* for smartphone: ~ 480px */
