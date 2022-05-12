@@ -8,11 +8,11 @@ export default function SignUp() {
                     <img className='logo-with-text' src='./logo-with-text.png' alt='logo' />
                     <form>
                         <div className='input-box'>
-                            <input className='signup-input' type="text" placeholder='닉네임을 입력해주세요' />
+                            <input className='signup-input' type="text" placeholder='닉네임을 입력해주세요.' />
                             <button type='button'>중복 확인</button>
                         </div>
                         <div className='input-box'>
-                            <input className='signup-input' type="email" placeholder='이메일을 입력해주세요' />
+                            <input className='signup-input' type="email" placeholder='이메일을 입력해주세요.' />
                             <button type='button'>중복 확인</button>
                         </div>
                         <div className='input-box'>
