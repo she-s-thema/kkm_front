@@ -114,6 +114,45 @@ body {
   width: 100%;
 }
 
+.App {
+  color: black;
+}
+.App aside {
+  height: 100vh;
+  position: fixed;
+  display: block;
+  width: 25%;
+  background-color: white;
+}
+.App aside .links {
+  padding-top: 100px;
+  width: 35%;
+  margin: auto;
+}
+.App aside .active {
+  font-weight: bold;
+}
+.App aside img {
+  padding-top: 30%;
+  display: block;
+  width: 100px;
+  margin: auto;
+}
+.App aside .link {
+  font-size: 20px;
+  text-decoration: none;
+  display: block;
+}
+.App aside .link:visited {
+  color: black;
+}
+.App aside .link:hover {
+  color: #bbbbbb;
+}
+.App .article {
+  padding-left: 25%;
+}
+
 /* for smartphone: ~ 480px */
 /*
 visibility : hidden -> display:none은 공간까지 사라지게 하지만 이것은 공간은 사라지지 않고 남는다.

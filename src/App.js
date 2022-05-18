@@ -1,16 +1,24 @@
 import './style.css';
 import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import SignUp from './components/SignUp';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
+import NotFound from './components/NotFound';
+import Side from './components/Side';
 
 export default function App() {
   return (
     <div className='App'>
-      <Header />
-      <div className='main-content'>
-        <SignUp />
-      </div>
+      <BrowserRouter>
+        <Header />
+        <Side />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='signup' element={<SignUp />} />
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

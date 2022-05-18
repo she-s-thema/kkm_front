@@ -117,6 +117,49 @@ body {
     width: 100%;
 }
 
+.App {
+    // padding-top: 40px;
+    color: black;
+    aside {
+        .links {
+            padding-top: 100px;
+            width: 35%;
+            margin: auto;
+        }
+        .active {
+            font-weight: bold;
+        }
+        height: 100vh;
+        position: fixed;
+        display: block;
+        width: 25%;
+        background-color: white;
+        img {
+            padding-top: 30%;
+            display: block;
+            width: 100px;
+            margin: auto;
+        }
+        .link {
+            font-size: 20px;
+            text-decoration: none;
+            display: block;
+            &:visited {
+                color: black;
+            }
+            &:hover {
+                color: $gray;
+            }
+            
+        }
+        
+    }
+    .article {
+        padding-left: 25%;
+    }
+}
+
+
 /* for smartphone: ~ 480px */
 // @media screen and (max-width: 480px) {
 //     .header-btn {
