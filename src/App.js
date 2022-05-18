@@ -2,6 +2,7 @@ import './style.css';
 import React from 'react'
 import Header from './components/Header';
 import SignUp from './components/SignUp';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 
 export default function App() {
   return (

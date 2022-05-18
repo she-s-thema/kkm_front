@@ -1,6 +1,10 @@
 @charset "UTF-8";
+@font-face {
+  font-family: "Noto";
+  src: url("./fonts/NotoSansKR-Regular.otf") format("truetype");
+}
 * {
-  font-family: "Noto Sans KR";
+  font-family: "Noto";
   margin: 0;
   padding: 0;
 }
@@ -16,7 +20,6 @@ body {
   height: 40px;
   background-color: white;
   display: flex;
-  border-bottom: 0.5px solid #bbbbbb;
   flex-wrap: nowrap;
   justify-content: flex-end;
 }
@@ -59,8 +62,31 @@ body {
 .signup-form form {
   margin-top: 70px;
 }
-.signup-form .input-box {
+.signup-form .singup-submit-btn {
+  width: 57px;
+  height: 57px;
   display: block;
+  margin: auto;
+  border: none;
+  background-color: white;
+  background-image: url(../public/clarity_circle-arrow-line.png);
+}
+.signup-form .agree-box {
+  display: flex;
+  align-items: center;
+  height: 14px;
+  margin-bottom: 50px;
+}
+.signup-form .agree-box input {
+  width: 14px;
+}
+.signup-form .agree-box .agree-text {
+  height: 14px;
+  font-size: 10px;
+  margin-left: 3px;
+}
+.signup-form .input-box {
+  display: flex;
   margin-bottom: 24px;
 }
 .signup-form .input-box input {
@@ -76,9 +102,12 @@ body {
   padding: 8px;
   border-radius: 4px;
 }
+.signup-form .input-box button:hover {
+  background-color: #909fc1;
+}
 .signup-form .input-box .signup-input {
-  display: flexbox;
-  flex-grow: 1;
+  flex-grow: 2;
+  width: auto;
 }
 
 .max-width {

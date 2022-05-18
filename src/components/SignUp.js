@@ -18,11 +18,11 @@ export default function SignUp() {
                         <div className='input-box'>
                             <input className='signup-pwd max-width' type="password" placeholder='비밀번호를 입력해주세요.'/>
                         </div>
-                        <div> 
+                        <div className='agree-box'>
                             <input type="checkbox" />
-                            <span>개인정보 수집 동의</span>
+                            <span className='agree-text'>개인정보 수집 동의</span>
                         </div>
-                        <input type="button"/>
+                        <input type="button" className='singup-submit-btn'/>
                     </form>
                 </div>
             </div>

@@ -1,7 +1,12 @@
 $gray:#bbbbbb;
 
+@font-face {
+    font-family: 'Noto';
+    src: url('./fonts/NotoSansKR-Regular.otf') format('truetype');
+}
+
 * {
-    font-family: 'Noto Sans KR';
+    font-family: 'Noto';
     margin: 0;
     padding: 0;
 }
@@ -17,7 +22,6 @@ body {
     height: 40px;
     background-color: white;
     display: flex;
-    border-bottom: 0.5px solid $gray;
     flex-wrap: nowrap;
     justify-content: flex-end;
 }
@@ -59,8 +63,32 @@ body {
     form {
         margin-top: 70px;
     }
-    .input-box {
+    .singup-submit-btn {
+        width: 57px;
+        height: 57px;
         display: block;
+        margin: auto;
+        border: none;
+        background-color: white;
+        background-image: url(../public/clarity_circle-arrow-line.png);
+    }
+    .agree-box {
+        display: flex;
+        align-items: center;
+        height: 14px;
+        margin-bottom: 50px;
+        input {
+            width: 14px;
+        }
+        .agree-text {
+            height: 14px;
+            font-size: 10px;
+            margin-left: 3px;
+        }
+    }
+
+    .input-box {
+        display: flex;
         margin-bottom: 24px;
         input {
             border: none;
@@ -74,10 +102,13 @@ body {
             background-color: #AFBEDF;
             padding: 8px;
             border-radius: 4px;
+            &:hover {
+                background-color: #909fc1
+            }
         }
         .signup-input {
-            display: flexbox;
-            flex-grow: 1;
+            flex-grow: 2;
+            width: auto;
         }
     }
 }
