@@ -114,42 +114,42 @@ body {
   width: 100%;
 }
 
-.App {
+.home {
   color: black;
 }
-.App aside {
+.home aside {
   height: 100vh;
   position: fixed;
   display: block;
   width: 25%;
   background-color: white;
 }
-.App aside .links {
+.home aside .links {
   padding-top: 100px;
   width: 35%;
   margin: auto;
 }
-.App aside .active {
+.home aside .active {
   font-weight: bold;
 }
-.App aside img {
+.home aside img {
   padding-top: 30%;
   display: block;
   width: 100px;
   margin: auto;
 }
-.App aside .link {
+.home aside .link {
   font-size: 20px;
   text-decoration: none;
   display: block;
 }
-.App aside .link:visited {
+.home aside .link:visited {
   color: black;
 }
-.App aside .link:hover {
+.home aside .link:hover {
   color: #bbbbbb;
 }
-.App .article {
+.home .article {
   padding-left: 25%;
 }
 

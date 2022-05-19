@@ -5,14 +5,12 @@ import Header from './components/Header';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
-import Side from './components/Side';
 
 export default function App() {
   return (
     <div className='App'>
       <BrowserRouter>
         <Header />
-        <Side />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='signup' element={<SignUp />} />
