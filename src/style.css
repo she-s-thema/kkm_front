@@ -21,7 +21,7 @@ body {
   background: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 .header .text-logo-img {
   height: 20px;
@@ -40,6 +40,58 @@ body {
   color: black;
   font-size: 16px;
   margin-left: 26px;
+}
+
+.login {
+  width: 480px;
+  height: 100vh;
+  background-color: white;
+  margin: auto;
+}
+.login .login-main {
+  width: 70%;
+  margin: auto;
+  text-align: center;
+  padding-top: 120px;
+}
+.login .login-main .no-text-logo {
+  width: 100px;
+  margin-bottom: 50px;
+}
+.login .login-main input {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: #F3F3F3;
+  padding: 18px 0;
+  margin-bottom: 17px;
+}
+.login .login-main input ::placeholder {
+  color: #929292;
+}
+.login .login-main input:focus {
+  background-color: #e1e1e1;
+  outline: none;
+}
+.login .login-main button {
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 44px;
+  margin: 20px 0 10px;
+  padding: 19px;
+  background-color: #646DC9;
+}
+.login .login-main button:hover {
+  border: 1px solid #646DC9;
+  background-color: #ffffff;
+  color: #646DC9;
+  padding: 18px;
+}
+.login .login-main .go-to-signup {
+  color: #92BAD0;
+  font-size: 12px;
 }
 
 /* for smartphone: ~ 480px */
