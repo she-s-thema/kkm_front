@@ -4,7 +4,7 @@
   src: url("./fonts/NotoSansKR-Regular.otf") format("truetype");
 }
 * {
-  font-family: "Noto";
+  font-family: "Noto Sans KR";
   margin: 0;
   padding: 0;
 }
@@ -18,139 +18,28 @@ body {
   position: fixed;
   width: 100%;
   height: 40px;
-  background-color: white;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-}
-
-.header-btn {
-  background-color: white;
-  border: none;
-  padding: 10px;
-}
-.header-btn:hover {
-  color: rgb(120, 120, 120);
-}
-
-.header-items {
-  width: 60%;
-  display: flex;
-  justify-content: center;
-}
-
-.main-content {
-  padding-top: 40px;
-}
-
-.signup-content {
-  margin: auto;
-  width: 480px;
-  height: 100vh;
-  background-color: white;
-  justify-content: center;
-}
-
-.signup-form {
-  padding: 0 20%;
-}
-.signup-form .logo-with-text {
-  display: block;
-  margin: 0 auto;
-  padding-top: 20%;
-}
-.signup-form form {
-  margin-top: 70px;
-}
-.signup-form .singup-submit-btn {
-  width: 57px;
-  height: 57px;
-  display: block;
-  margin: auto;
-  border: none;
-  background-color: white;
-  background-image: url(../public/clarity_circle-arrow-line.png);
-}
-.signup-form .agree-box {
+  background: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
-  height: 14px;
-  margin-bottom: 50px;
+  flex-wrap: nowrap;
 }
-.signup-form .agree-box input {
-  width: 14px;
+.header .text-logo-img {
+  height: 20px;
 }
-.signup-form .agree-box .agree-text {
-  height: 14px;
-  font-size: 10px;
-  margin-left: 3px;
-}
-.signup-form .input-box {
+.header .header-content {
+  justify-content: space-between;
   display: flex;
-  margin-bottom: 24px;
-}
-.signup-form .input-box input {
-  border: none;
-  border-bottom: 0.5px solid #AFBEDF;
-  padding: 8px;
-  font-size: 12px;
-}
-.signup-form .input-box button {
-  color: white;
-  border: none;
-  background-color: #AFBEDF;
-  padding: 8px;
-  border-radius: 4px;
-}
-.signup-form .input-box button:hover {
-  background-color: #909fc1;
-}
-.signup-form .input-box .signup-input {
-  flex-grow: 2;
-  width: auto;
-}
-
-.max-width {
-  width: 100%;
-}
-
-.home {
-  color: black;
-}
-.home aside {
-  height: 100vh;
-  position: fixed;
-  display: block;
-  width: 25%;
-  background-color: white;
-}
-.home aside .links {
-  padding-top: 100px;
-  width: 35%;
   margin: auto;
+  width: 50%;
 }
-.home aside .active {
+.header .header-content .active {
   font-weight: bold;
 }
-.home aside img {
-  padding-top: 30%;
-  display: block;
-  width: 100px;
-  margin: auto;
-}
-.home aside .link {
-  font-size: 20px;
+.header .header-content .header-link {
   text-decoration: none;
-  display: block;
-}
-.home aside .link:visited {
   color: black;
-}
-.home aside .link:hover {
-  color: #bbbbbb;
-}
-.home .article {
-  padding-left: 25%;
+  font-size: 16px;
+  margin-left: 26px;
 }
 
 /* for smartphone: ~ 480px */

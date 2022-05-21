@@ -1,6 +1,4 @@
 import React from 'react'
-import Side from './Side'
-
 export default function SignUp() {
     return (
         <div className='signup'>
