@@ -61,19 +61,21 @@ body {
 .login .login-main input {
   width: 100%;
   border: none;
-  border-radius: 5px;
-  background-color: #F3F3F3;
+  border-radius: 10px;
+  background-color: #ffffff;
   padding: 18px 0;
   margin-bottom: 17px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
 }
 .login .login-main input ::placeholder {
   color: #929292;
 }
 .login .login-main input:focus {
-  background-color: #e1e1e1;
+  background-color: #f3f3f3;
   outline: none;
 }
 .login .login-main button {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
   width: 100%;
   color: white;
   font-weight: bold;

@@ -1,4 +1,5 @@
 $gray:#bbbbbb;
+$shadow:1px 1px 10px rgba(0, 0, 0, 0.2);
 
 @font-face {
     font-family: 'Noto';
@@ -61,19 +62,21 @@ body {
         input {
             width: 100%;
             border: none;
-            border-radius: 5px;
-            background-color: #F3F3F3;
+            border-radius: 10px;
+            background-color: #ffffff;
             padding: 18px 0;
             margin-bottom: 17px;
+            box-shadow: $shadow;
             ::placeholder {
                 color: #929292;
             }
             &:focus {
-                background-color: #e1e1e1;
+                background-color: #f3f3f3;
                 outline: none;
             }
         }
         button {
+            box-shadow: $shadow;
             width: 100%;
             color: white;
             font-weight: bold;
