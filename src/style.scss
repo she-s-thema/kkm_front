@@ -1,5 +1,5 @@
 $gray:#bbbbbb;
-$shadow:1px 1px 10px rgba(0, 0, 0, 0.2);
+$shadow:1px 1px 10px rgba(0, 0, 0, 0.15);
 
 @font-face {
     font-family: 'Noto';
@@ -60,13 +60,14 @@ body {
             margin-bottom: 50px;
         }
         input {
-            width: 100%;
+            width: 95%;
             border: none;
             border-radius: 10px;
             background-color: #ffffff;
             padding: 18px 0;
             margin-bottom: 17px;
             box-shadow: $shadow;
+            padding-left: 5%;
             ::placeholder {
                 color: #929292;
             }
@@ -95,6 +96,11 @@ body {
         .go-to-signup {
             color: #92BAD0;
             font-size: 12px;
+        }
+        .errMsg {
+            font-weight: bold;
+            color: #e76f6f;
+            font-size: 13px;
         }
     }
 }

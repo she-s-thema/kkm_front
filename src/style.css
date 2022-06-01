@@ -59,13 +59,14 @@ body {
   margin-bottom: 50px;
 }
 .login .login-main input {
-  width: 100%;
+  width: 95%;
   border: none;
   border-radius: 10px;
   background-color: #ffffff;
   padding: 18px 0;
   margin-bottom: 17px;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+  padding-left: 5%;
 }
 .login .login-main input ::placeholder {
   color: #929292;
@@ -75,7 +76,7 @@ body {
   outline: none;
 }
 .login .login-main button {
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
   width: 100%;
   color: white;
   font-weight: bold;
@@ -94,6 +95,11 @@ body {
 .login .login-main .go-to-signup {
   color: #92BAD0;
   font-size: 12px;
+}
+.login .login-main .errMsg {
+  font-weight: bold;
+  color: #e76f6f;
+  font-size: 13px;
 }
 
 /* for smartphone: ~ 480px */
