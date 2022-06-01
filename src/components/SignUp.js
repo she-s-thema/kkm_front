@@ -42,7 +42,7 @@ export default function SignUp() {
                     <input name="password" type="password" placeholder='비밀번호를 입력해주세요.' onChange={handleChange}/>
                     <button type="submit">회원가입</button>
                 </form>
-                <span>{errMsg}</span>
+                <span className='errMsg'>{errMsg}</span>
             </div>
         </main>
     )
