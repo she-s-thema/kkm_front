@@ -12,13 +12,19 @@
 body {
   background-color: #f3f3f3;
   height: 100%;
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .header {
   position: fixed;
+  margin-bottom: 50px;
   width: 100%;
   height: 50px;
-  background: rgba(255, 255, 255, 0.8);
+  background: white;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -42,11 +48,51 @@ body {
   margin-left: 26px;
 }
 
-.login {
-  width: 480px;
+.loging {
+  position: fixed;
+  width: 100%;
   height: 100vh;
+  background-color: rgba(0, 0, 0, 0.247);
+}
+.loging .login {
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 50vh;
+  height: 50%;
   background-color: white;
+  border-radius: 40px;
+}
+.loging .login .login-main {
+  width: 70%;
   margin: auto;
+  text-align: center;
+  padding-top: 120px;
+}
+.loging .login .login-main .no-text-logo {
+  width: 100px;
+  margin-bottom: 50px;
+}
+.loging .login .login-main .login-by-kakao {
+  display: block;
+  color: black;
+  text-decoration: none;
+  background-color: #FEE500;
+  border: 1px solid #FEE500;
+  border-radius: 8px;
+  padding: 10px;
+}
+.loging .login .login-main .login-by-kakao:hover {
+  border: 1px solid #FEE500;
+  background-color: white;
+}
+
+.login {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 50vh;
+  height: 50%;
+  background-color: white;
 }
 .login .login-main {
   width: 70%;
@@ -58,48 +104,14 @@ body {
   width: 100px;
   margin-bottom: 50px;
 }
-.login .login-main input {
-  width: 95%;
-  border: none;
-  border-radius: 10px;
-  background-color: #ffffff;
-  padding: 18px 0;
-  margin-bottom: 17px;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
-  padding-left: 5%;
-}
-.login .login-main input ::placeholder {
-  color: #929292;
-}
-.login .login-main input:focus {
-  background-color: #f3f3f3;
-  outline: none;
-}
-.login .login-main button {
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  color: white;
+.login .login-main .login-by-kakao {
+  display: block;
   font-weight: bold;
-  border: none;
-  border-radius: 44px;
-  margin: 20px 0 10px;
-  padding: 19px;
-  background-color: #646DC9;
-}
-.login .login-main button:hover {
-  border: 1px solid #646DC9;
-  background-color: #ffffff;
-  color: #646DC9;
-  padding: 18px;
-}
-.login .login-main .go-to-signup {
-  color: #92BAD0;
-  font-size: 12px;
-}
-.login .login-main .errMsg {
-  font-weight: bold;
-  color: #e76f6f;
-  font-size: 13px;
+  color: black;
+  text-decoration: none;
+  background-color: #f9e000;
+  border-radius: 100px;
+  padding: 10px;
 }
 
 /* for smartphone: ~ 480px */
