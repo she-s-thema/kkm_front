@@ -1,12 +1,12 @@
 import './style.css';
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
 import Login from './components/Login';
-import NaverLogin from './components/NaverLogin';
+import Auth from './components/Auth';
 
 export default function App() {
   return (
@@ -17,8 +17,8 @@ export default function App() {
           <Route path='/' element={<Home />} />
           <Route path='login' element={<Login />}/>
           <Route path='signup' element={<SignUp />} />
+          <Route path="auth/kakao/callback" element={<Auth />}></Route>
           <Route path="*" element={<NotFound />}></Route>
-          <Route path='/naver' element={<NaverLogin />} />
         </Routes>
       </BrowserRouter>
     </div>
