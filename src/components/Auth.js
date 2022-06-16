@@ -5,7 +5,6 @@ const Auth = () => {
     console.log(code)
     return (
         <div>
-            loading....
             { code }
         </div>
     );
