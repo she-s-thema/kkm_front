@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom';
 
 export default function Header(props) {
@@ -7,10 +7,10 @@ export default function Header(props) {
             <div className='header-content'>
                 <img className='text-logo-img' src='./imgs/text-logo.png' alt='logo' />
                 <div className='links'>
-                    <NavLink className="header-link" to="/">홈</NavLink>
-                    <NavLink className="header-link" to="/chat">채팅</NavLink>
-                    <NavLink className="header-link" to="/mypage">마이페이지</NavLink>
-                    <NavLink className="header-link" onClick={props.showLogin} to="/login">로그인</NavLink>
+                    <NavLink className="header-link" to="/">HOME</NavLink>
+                    <NavLink className="header-link" to="/chat">CHAT</NavLink>
+                    <NavLink className="header-link" to="/mypage">MYPAGE</NavLink>
+                    <NavLink className="header-link" onClick={props.showLogin} to="/login">LOGIN</NavLink>
                 </div>
             </div>
         </header>
