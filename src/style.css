@@ -1,10 +1,18 @@
 @charset "UTF-8";
 @font-face {
-  font-family: "Noto";
-  src: url("./fonts/NotoSansKR-Regular.otf") format("truetype");
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "S-CoreDream-5Medium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 * {
-  font-family: "Noto Sans KR";
+  font-family: "S-CoreDream-3Light";
   margin: 0;
   padding: 0;
 }
@@ -12,13 +20,19 @@
 body {
   background-color: #f3f3f3;
   height: 100%;
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .header {
   position: fixed;
+  margin-bottom: 50px;
   width: 100%;
   height: 50px;
-  background: rgba(255, 255, 255, 0.8);
+  background: white;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -33,7 +47,7 @@ body {
   width: 50%;
 }
 .header .header-content .active {
-  font-weight: bold;
+  font-family: S-CoreDream-5Medium;
 }
 .header .header-content .header-link {
   text-decoration: none;
@@ -42,64 +56,46 @@ body {
   margin-left: 26px;
 }
 
-.login {
-  width: 480px;
-  height: 100vh;
-  background-color: white;
-  margin: auto;
+.login-popup {
+  display: flex;
+  justify-content: center;
 }
-.login .login-main {
-  width: 70%;
-  margin: auto;
-  text-align: center;
-  padding-top: 120px;
-}
-.login .login-main .no-text-logo {
-  width: 100px;
-  margin-bottom: 50px;
-}
-.login .login-main input {
-  width: 95%;
-  border: none;
+.login-popup .login {
+  position: fixed;
+  display: flex;
+  width: 40vh;
+  height: 20%;
+  background-color: #ffffff;
   border-radius: 10px;
-  background-color: #ffffff;
-  padding: 18px 0;
-  margin-bottom: 17px;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
-  padding-left: 5%;
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(180%);
 }
-.login .login-main input ::placeholder {
-  color: #929292;
+.login-popup .login .login-by-kakao {
+  display: block;
+  width: 40%;
+  height: 30px;
+  line-height: 30px;
+  font-family: S-CoreDream-5Medium;
+  color: black;
+  font-size: 15px;
+  text-decoration: none;
+  text-align: center;
+  background-color: #f9e000;
+  border-radius: 100px;
+  padding: 10px;
 }
-.login .login-main input:focus {
-  background-color: #f3f3f3;
-  outline: none;
+.login-popup .login .login-by-kakao:hover {
+  border: 1px solid #FEE500;
+  background-color: white;
 }
-.login .login-main button {
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+
+.loging {
+  position: fixed;
   width: 100%;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 44px;
-  margin: 20px 0 10px;
-  padding: 19px;
-  background-color: #646DC9;
-}
-.login .login-main button:hover {
-  border: 1px solid #646DC9;
-  background-color: #ffffff;
-  color: #646DC9;
-  padding: 18px;
-}
-.login .login-main .go-to-signup {
-  color: #92BAD0;
-  font-size: 12px;
-}
-.login .login-main .errMsg {
-  font-weight: bold;
-  color: #e76f6f;
-  font-size: 13px;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.247);
 }
 
 /* for smartphone: ~ 480px */

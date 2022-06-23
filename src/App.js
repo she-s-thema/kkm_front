@@ -1,22 +1,28 @@
 import './style.css';
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import SignUp from './components/SignUp';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
 import Login from './components/Login';
 import Auth from './components/Auth';
 
 export default function App() {
+  const [loginWindow, setLoginWindow] = useState();
+  const showLogin = () => {
+    setLoginWindow(<Login stopShowLogin={stopShowLogin} />)
+  }
+  const stopShowLogin = () => {
+    setLoginWindow();
+    window.location.href="/"
+  }
   return (
     <div className='App'>
       <BrowserRouter>
-        <Header />
+        <Header showLogin={showLogin} />
+        {loginWindow}
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='login' element={<Login />}/>
-          <Route path='signup' element={<SignUp />} />
           <Route path="auth/kakao/callback" element={<Auth />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
