@@ -23,7 +23,6 @@ export default function App() {
         {loginWindow}
         <Routes>
           <Route path='/' element={<Home />} />
-          {/* <Route path='login' element={<Login />}/> */}
           <Route path="auth/kakao/callback" element={<Auth />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
