@@ -5,13 +5,13 @@ export default function Login(props) {
     const REDIRECT_URI =  "http://localhost:3000/auth/kakao/callback";
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
     return (
-        <section onClick={props.stopShowLogin} className='loging'>
-            <main className='login'>
-                <div className='login-main'>
-                    <img className='no-text-logo' alt='no-text-logo' src='./imgs/logo-with-text.png'/>
-                    <a className='login-by-kakao' href={KAKAO_AUTH_URL}>카카오 로그인</a>
-                </div>
-            </main>
-        </section>
+        <>
+            <div className='login-popup'>
+                <main className='login'>
+                    <a className='login-by-kakao' href={KAKAO_AUTH_URL}>카카오로 로그인하기</a>
+                </main>
+            </div>
+            <div onClick={props.stopShowLogin} className='loging'></div>
+        </>
     )
 }
