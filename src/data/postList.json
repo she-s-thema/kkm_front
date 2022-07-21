@@ -1,7 +1,7 @@
 [
     {
         "id":0,
-        "imgSrc":"https://i.pinimg.com/564x/e0/2f/6a/e02f6a5ac24da5c2e45be6f789ed54eb.jpg",
+        "imgSrc":["https://i.pinimg.com/564x/e0/2f/6a/e02f6a5ac24da5c2e45be6f789ed54eb.jpg"],
         "title":"흰색 반크롭 타이트한 셔츠",
         "ownerLocation":"영도구 청학1동",
         "rentalPrice":4000,
@@ -21,7 +21,7 @@
     },
     {
         "id":1,
-        "imgSrc":"https://i.pinimg.com/736x/a5/44/fb/a544fb9c5c249e9d18d55da30de4d494.jpg",
+        "imgSrc":["https://i.pinimg.com/736x/a5/44/fb/a544fb9c5c249e9d18d55da30de4d494.jpg"],
         "title":"와이드 데님 팬츠",
         "ownerLocation":"중구 광복동",
         "rentalPrice":5500,
@@ -41,7 +41,7 @@
     },
     {
         "id":2,
-        "imgSrc":"https://i.pinimg.com/564x/42/d7/44/42d744f3ae39f6cd307a35a4588ae31b.jpg",
+        "imgSrc":["https://i.pinimg.com/564x/42/d7/44/42d744f3ae39f6cd307a35a4588ae31b.jpg"],
         "title":"255 검정 가죽 발목 구두",
         "ownerLocation":"뉴욕시 황련동",
         "rentalPrice":4000,
