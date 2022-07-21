@@ -1,28 +1,94 @@
 import React from 'react'
 import pl from '../../data/postList.json';
-import user from '../../data/currentUser.json'
+import styled from "styled-components";
+import { UserLocation } from './UserLocation';
 
 export const Home = () => {
   return (
-    <div>
-      <div>
-        <span>
-          최근
-          <b> {user.name}</b>
-          님의 동네
-          <b> {user.locations[0].substr(user.locations[0].indexOf(" ") + 1)} </b>
-          <svg width="15" height="13" viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20.3712 0.986253L11 10.1213L1.62874 0.986253C1.46131 0.822711 1.23654 0.731153 1.00249 0.731153C0.768439 0.731153 0.543674 0.822711 0.37624 0.986253C0.295169 1.06569 0.230763 1.1605 0.186794 1.26513C0.142826 1.36977 0.120178 1.48213 0.120178 1.59563C0.120178 1.70913 0.142826 1.82148 0.186794 1.92612C0.230763 2.03076 0.295169 2.12557 0.37624 2.205L10.3456 11.925C10.5207 12.0957 10.7555 12.1912 11 12.1912C11.2445 12.1912 11.4793 12.0957 11.6544 11.925L21.6237 2.20688C21.7054 2.12739 21.7703 2.03234 21.8146 1.92736C21.8589 1.82237 21.8817 1.70958 21.8817 1.59563C21.8817 1.48168 21.8589 1.36888 21.8146 1.2639C21.7703 1.15891 21.7054 1.06387 21.6237 0.984377C21.4563 0.820835 21.2315 0.729279 20.9975 0.729279C20.7634 0.729279 20.5387 0.820835 20.3712 0.984377V0.986253Z" fill="black"/>
-          </svg>
-        </span>
-      </div>
-      {pl.map(data => {
-        <div>
-          <img src={data.imgSrc} />
-          <span>{data.title}</span>
-          <span></span>
-        </div>
-      })}
-    </div>
+    <HomeBox>
+      <Article>
+        <UserLocation />
+        <Cards>
+          {pl.map(data => {
+            const card = <Card key={data.id}>
+              <Image src={data.imgSrc[0]} />
+              <Title>{data.title}</Title>
+              <Address>{data.ownerLocation}</Address>
+              <EndPoint>
+                <span>{data.rentalPrice}원</span>
+                <Heart>
+                  <HeartIcon src="../../assets/icons/heart.png" />
+                  <span>{data.heart}</span>
+                </Heart>
+              </EndPoint>
+            </Card>
+            return card;
+          })}
+        </Cards>
+      </Article>
+    </HomeBox>
   )
 }
+
+const HomeBox = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`;
+
+const Article = styled.article`
+  width: 50%;
+  padding: 0 10% 10% 10%;
+  background-color: white;
+`;
+
+const Cards = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 31.2% 31.2% 31.2%;
+  grid-gap: 1rem;
+`;
+
+const Card = styled.div`
+  width: 100%; 
+`;
+
+const Image = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 280px;
+  border-radius: 5px;
+`;
+
+const Title = styled.p`
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const Address = styled.p`
+  color: #828282;
+  font-size: 0.8rem;
+`;
+
+const EndPoint = styled.div`
+  display: flex;
+  color: #646FD4;
+`;
+
+const Heart = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  font-weight: 300;
+  line-height: 16px;
+`;
+
+const HeartIcon = styled.img`
+  width: 16px;
+  margin-top: 1px;
+  margin-right: 4px;
+`;
