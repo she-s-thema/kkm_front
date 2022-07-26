@@ -6,6 +6,7 @@ import { Home } from '../pages/home/Home';
 import { Chat } from '../pages/chat/Chat'
 import { Post } from '../pages/post/Post'
 import { Mypage } from '../pages/mypage/Mypage';
+import { Login } from '../pages/auth/Login';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path='/chat' element={<Chat /> }/>
           <Route path='/posting' element={<Post /> }/>
           <Route path='/mypage' element={<Mypage /> }/>
+          <Route path='/login' element={<Login />}/>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
