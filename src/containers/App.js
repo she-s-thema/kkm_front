@@ -7,6 +7,7 @@ import { Chat } from '../pages/chat/Chat'
 import { Post } from '../pages/post/Post'
 import { Mypage } from '../pages/mypage/Mypage';
 import { Login } from '../pages/auth/Login';
+import { Redirect } from '../pages/auth/Redirect';
 
 export default function App() {
   return (
@@ -14,11 +15,12 @@ export default function App() {
       <BrowserRouter>
       <Header />
         <Routes>
-          <Route path='/'  element={<Home />}/>
+          <Route exact path='/'  element={<Home />}/>
           <Route path='/chat' element={<Chat /> }/>
           <Route path='/posting' element={<Post /> }/>
           <Route path='/mypage' element={<Mypage /> }/>
           <Route path='/login' element={<Login />}/>
+          <Route path='/auth/kakao/*' element={<Redirect />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
