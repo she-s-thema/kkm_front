@@ -8,6 +8,7 @@ import { Post } from '../pages/post/Post'
 import { Mypage } from '../pages/mypage/Mypage';
 import { Login } from '../pages/auth/Login';
 import { Redirect } from '../pages/auth/Redirect';
+import { MoreInfo } from '../pages/auth/MoreInfo';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route path='/mypage' element={<Mypage /> }/>
           <Route path='/login' element={<Login />}/>
           <Route path='/auth/kakao/*' element={<Redirect />} />
+          <Route path='/moreInfo' element={<MoreInfo />}/>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
