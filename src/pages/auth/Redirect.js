@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import queryString from "query-string";
 import axios from 'axios';
 
 export const Redirect = () => {
+    const [ userData, setUserData ] = useState();
 
     const kakaoLogin =  async(code) => {
         const res =  await axios.post(`/user/kakaoLogin?code=${code}`)
         .then(res =>{
-            if (res.data["id"] === 1) {
-                // user_id, nickname, k_id, k_img_url, k_email
-                console.log(res.data);
-                // window.location.href = "/moreInfo";
+            setUserData(res.data);
+            if(res.data["status"] = "Guest") {
+                window.location.href = "/login/moreInfo";
             } else {
-                console.log(res.data);
-                // window.location.href = "/";
+                window.location.href = "/"
             }
         });
     }
