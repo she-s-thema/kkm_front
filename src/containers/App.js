@@ -22,7 +22,7 @@ export default function App() {
           <Route path='/mypage' element={<Mypage /> }/>
           <Route path='/login' element={<Login />}/>
           <Route path='/auth/kakao/*' element={<Redirect />} />
-          <Route path='/moreInfo' element={<MoreInfo />}/>
+          <Route path='/login/moreInfo' element={<MoreInfo />}/>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
