@@ -22,9 +22,9 @@ export const Redirect = () => {
   const getKakaoUserInfo = async (code) => {
     await axios.get(`/user/getKakaoUserInfo?code=${code}`).then((res) => {
       setUser({
-        user_id: 0,
+        user_id: "0",
         nickname: "",
-        k_id: res.data["k_id"],
+        k_id: String(res.data["k_id"]),
         k_img_url: res.data["k_img_url"],
       });
       console.log(res.data["k_id"]);
