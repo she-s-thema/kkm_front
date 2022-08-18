@@ -1,7 +1,7 @@
-import React from 'react'
-import pl from '../../data/postList.json';
+import React from "react";
+import pl from "../../data/postList.json";
 import styled from "styled-components";
-import { UserLocation } from './UserLocation';
+import { UserLocation } from "./UserLocation";
 
 export const Home = () => {
   return (
@@ -9,26 +9,28 @@ export const Home = () => {
       <Article>
         <UserLocation />
         <Cards>
-          {pl.map(data => {
-            const card = <Card key={data.id}>
-              <Image src={data.imgSrc[0]} />
-              <Title>{data.title}</Title>
-              <Address>{data.ownerLocation}</Address>
-              <EndPoint>
-                <span>{data.rentalPrice}원</span>
-                <Heart>
-                  <HeartIcon src="../../assets/icons/heart.png" />
-                  <span>{data.heart}</span>
-                </Heart>
-              </EndPoint>
-            </Card>
+          {pl.map((data) => {
+            const card = (
+              <Card key={data.id}>
+                <Image src={data.imgSrc[0]} />
+                <Title>{data.title}</Title>
+                <Address>{data.ownerLocation}</Address>
+                <EndPoint>
+                  <span>{data.rentalPrice}원</span>
+                  <Heart>
+                    <HeartIcon src="../../assets/icons/heart.png" />
+                    <span>{data.heart}</span>
+                  </Heart>
+                </EndPoint>
+              </Card>
+            );
             return card;
           })}
         </Cards>
       </Article>
     </HomeBox>
-  )
-}
+  );
+};
 
 const HomeBox = styled.div`
   display: flex;
@@ -46,11 +48,11 @@ const Cards = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 31.2% 31.2% 31.2%;
-  grid-gap: 1rem;
+  grid-gap: 1.2rem;
 `;
 
 const Card = styled.div`
-  width: 100%; 
+  width: 100%;
 `;
 
 const Image = styled.img`
@@ -62,7 +64,7 @@ const Image = styled.img`
 
 const Title = styled.p`
   display: block;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
@@ -76,7 +78,7 @@ const Address = styled.p`
 
 const EndPoint = styled.div`
   display: flex;
-  color: #646FD4;
+  color: #646fd4;
 `;
 
 const Heart = styled.div`

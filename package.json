@@ -13,7 +13,8 @@
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "recoil": "^0.7.4",
+    "recoil": "^0.7.5",
+    "recoil-persist": "^4.2.0",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
@@ -21,8 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build:sass": "sass --watch src/style.scss:src/style.css"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
