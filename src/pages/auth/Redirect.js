@@ -13,7 +13,9 @@ export const Redirect = () => {
       if (res.data === "guest") {
         window.location.href = "/login/moreInfo";
       } else {
-        window.location.href = "/";
+        console.log(res.data);
+        localStorage.setItem("token", res.data);
+        // window.location.href = "/";
       }
       console.log(res.data);
     });
