@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import queryString from "query-string";
 import axios from "axios";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userInfo } from "../../data/atom";
 
 export const Redirect = () => {
