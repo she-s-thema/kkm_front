@@ -4,19 +4,26 @@ import React, { useEffect, useState } from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { useRecoilState } from "recoil";
 import { userInfo } from "../../data/atom";
-import { Address } from "./Address";
+import { ShowAddress } from "./ShowAddress";
 
 export const MoreInfo = () => {
   const [user, setUser] = useRecoilState(userInfo);
-  const [address, setAddress] = useState("");
-  const [nickname, setNickname] = useState("");
+  const [moreInfo, setMoreInfo] = useState({
+    nickname: "",
+    address: "",
+    lat: 0,
+    lon: 0,
+  });
   const [isClicked, setIsClicked] = useState(false);
+  const { kakao } = window;
 
   const saveInfo = async () => {
     setUser((prev) => {
       let newInfo = { ...prev };
-      newInfo["nickname"] = nickname;
-      newInfo["address"] = address;
+      newInfo["nickname"] = moreInfo["nickname"];
+      newInfo["address"] = moreInfo["address"];
+      newInfo["lat"] = moreInfo["lat"];
+      newInfo["lon"] = moreInfo["lon"];
       return newInfo;
     });
   };
@@ -37,19 +44,35 @@ export const MoreInfo = () => {
   };
 
   const completeHandler = (data) => {
-    setAddress(() => data["address"]);
+    setMoreInfo((prev) => {
+      let curr = { ...prev };
+      curr["address"] = data["address"];
+      return curr;
+    });
     setIsClicked(false);
   };
 
-  const setViewHandler = () => {
+  const viewHandler = () => {
     setIsClicked((prev) => !prev);
   };
 
   useEffect(() => {
+    if (moreInfo["address"] !== "") {
+      var geocoder = new kakao.maps.services.Geocoder();
+      geocoder.addressSearch(moreInfo["address"], function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          setMoreInfo((prev) => {
+            let neww = { ...prev };
+            neww["lat"] = result[0].y;
+            neww["lon"] = result[0].x;
+          });
+        }
+      });
+    }
     if (user["nickname"] !== "" && user["address"] !== "") {
       signUp();
     }
-  }, [user]);
+  }, [moreInfo]);
 
   return (
     <div>
@@ -60,17 +83,23 @@ export const MoreInfo = () => {
         <input
           type="text"
           placeholder="닉네임 설정 2 ~ 10자"
-          onChange={(e) => setNickname(e.target.value)}
+          onChange={(e) => {
+            setMoreInfo((prev) => {
+              let curr = { ...prev };
+              curr["nickname"] = e.target.value;
+              return curr;
+            });
+          }}
         />
       </div>
       <div>
-        <button onClick={setViewHandler}>위치 설정</button>
+        <button onClick={viewHandler}>위치 설정</button>
       </div>
       <div>
         {isClicked ? (
           <DaumPostcodeEmbed onComplete={completeHandler} autoClose={false} />
         ) : (
-          <Address add={address} />
+          <ShowAddress add={moreInfo} />
         )}
       </div>
       <div>
