@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import queryString from "query-string";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { userInfo } from "../../data/atom";
+import { kakaoUserInfo } from "../../data/atom";
 
 export const Redirect = () => {
-  const [user, setUser] = useRecoilState(userInfo);
+  const [user, setUser] = useRecoilState(kakaoUserInfo);
 
   const isSignUpUser = async (k_id) => {
     console.log(k_id);
