@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import queryString from "query-string";
 import axios from "axios";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userInfo } from "../../data/atom";
 
 export const Redirect = () => {
@@ -13,7 +13,9 @@ export const Redirect = () => {
       if (res.data === "guest") {
         window.location.href = "/login/moreInfo";
       } else {
-        window.location.href = "/";
+        console.log(res.data);
+        localStorage.setItem("token", res.data);
+        // window.location.href = "/";
       }
       console.log(res.data);
     });
