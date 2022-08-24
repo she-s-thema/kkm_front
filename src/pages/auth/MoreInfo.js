@@ -1,112 +1,85 @@
-import { type } from "@testing-library/user-event/dist/type";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
-import { useRecoilState } from "recoil";
-import { userInfo } from "../../data/atom";
-import { ShowAddress } from "./ShowAddress";
+import { useRecoilValue } from "recoil";
+import styled from "styled-components";
+import { kakaoUserInfo } from "../../data/atom";
 
 export const MoreInfo = () => {
-  const [user, setUser] = useRecoilState(userInfo);
-  const [moreInfo, setMoreInfo] = useState({
-    nickname: "",
-    address: "",
-    lat: 0,
-    lon: 0,
-  });
-  const [isClicked, setIsClicked] = useState(false);
+  const newUser = new FormData();
   const { kakao } = window;
+  const user = useRecoilValue(kakaoUserInfo);
+  const [isClicked, setIsClicked] = useState(false);
+  const [nickname, setNickname] = useState("");
+  const [address, setAddress] = useState("");
 
-  const saveInfo = async () => {
-    setUser((prev) => {
-      let newInfo = { ...prev };
-      newInfo["nickname"] = moreInfo["nickname"];
-      newInfo["address"] = moreInfo["address"];
-      newInfo["lat"] = moreInfo["lat"];
-      newInfo["lon"] = moreInfo["lon"];
-      return newInfo;
-    });
+  const completeHandler = (data) => {
+    // 위치 선택이 끝난 후
+    setAddress(data["address"]);
+    setIsClicked(false);
   };
 
   const signUp = async () => {
-    const newUser = new FormData();
-    newUser.append("user_id", "0");
-    newUser.append("nickname", user["nickname"]);
-    newUser.append("k_id", user["k_id"]);
-    newUser.append("k_img_url", user["k_img_url"]);
-    newUser.append("lat", user["lat"]);
-    newUser.append("lon", user["lon"]);
-    newUser.append("address", user["address"]);
-
+    for (let key of newUser.keys()) {
+      console.log(key);
+    }
+    for (let value of newUser.values()) {
+      console.log(value);
+    }
     await axios
       .post(`/user/join`, newUser)
       .then((res) => console.log(res.data));
   };
 
-  const completeHandler = (data) => {
-    setMoreInfo((prev) => {
-      let curr = { ...prev };
-      curr["address"] = data["address"];
-      return curr;
-    });
-    setIsClicked(false);
-  };
-
-  const viewHandler = () => {
-    setIsClicked((prev) => !prev);
-  };
-
   useEffect(() => {
-    if (moreInfo["address"] !== "") {
+    if (address !== "") {
+      newUser.append("user_id", "0");
+      newUser.append("k_id", user["k_id"]);
+      newUser.append("k_img_url", user["k_img_url"].replace(/['"]/g, ""));
+      newUser.append("nickname", nickname);
       var geocoder = new kakao.maps.services.Geocoder();
-      geocoder.addressSearch(moreInfo["address"], function (result, status) {
+      geocoder.addressSearch(address, function (result, status) {
         if (status === kakao.maps.services.Status.OK) {
-          setMoreInfo((prev) => {
-            let neww = { ...prev };
-            neww["lat"] = result[0].y;
-            neww["lon"] = result[0].x;
-          });
+          // 위도 : result[0].y, 경도 : result[0].x
+          newUser.append("lat", result[0].y);
+          newUser.append("lon", result[0].x);
+          newUser.append("address", address);
         }
       });
     }
-    if (user["nickname"] !== "" && user["address"] !== "") {
-      signUp();
-    }
-  }, [moreInfo]);
+  }, [address]);
 
   return (
     <div>
-      <div>
-        <span>닉네임 설정</span>
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="닉네임 설정 2 ~ 10자"
-          onChange={(e) => {
-            setMoreInfo((prev) => {
-              let curr = { ...prev };
-              curr["nickname"] = e.target.value;
-              return curr;
-            });
-          }}
-        />
-      </div>
-      <div>
-        <button onClick={viewHandler}>위치 설정</button>
-      </div>
-      <div>
-        {isClicked ? (
-          <DaumPostcodeEmbed onComplete={completeHandler} autoClose={false} />
-        ) : (
-          <ShowAddress add={moreInfo} />
-        )}
-      </div>
-      <div>
-        <button type="button" onClick={saveInfo}>
-          회원가입
-        </button>
-      </div>
+      <ProfileImg src={user["k_img_url"].replace(/['"]/g, "")} />
+      <span>닉네임 설정</span>
+      <input
+        type="text"
+        placeholder="닉네임 설정 2 ~ 10자"
+        onChange={(e) => {
+          setNickname(e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          setIsClicked((prev) => !prev);
+        }}
+      >
+        위치 설정
+      </button>
+      {isClicked && (
+        <DaumPostcodeEmbed onComplete={completeHandler} autoClose={false} />
+      )}
+      <button type="button" onClick={signUp}>
+        회원가입
+      </button>
     </div>
   );
 };
+
+const ProfileImg = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  object-fit: cover;
+`;
