@@ -20,19 +20,17 @@ export const MoreInfo = () => {
   };
 
   const signUp = async () => {
-    for (let key of newUser.keys()) {
-      console.log(key);
-    }
-    for (let value of newUser.values()) {
-      console.log(value);
-    }
+    // 폼 데이터 서버로 전송
     await axios
       .post(`/user/join`, newUser)
       .then((res) => console.log(res.data));
+
+    window.location.href = "/";
   };
 
   useEffect(() => {
     if (address !== "") {
+      // setAddress가 실행됐을 때
       newUser.append("user_id", "0");
       newUser.append("k_id", user["k_id"]);
       newUser.append("k_img_url", user["k_img_url"].replace(/['"]/g, ""));
@@ -70,6 +68,7 @@ export const MoreInfo = () => {
       {isClicked && (
         <DaumPostcodeEmbed onComplete={completeHandler} autoClose={false} />
       )}
+      {address}
       <button type="button" onClick={signUp}>
         회원가입
       </button>
