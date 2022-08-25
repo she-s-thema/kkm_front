@@ -18,7 +18,7 @@ export const Header = () => {
           <NavLink className="nav-item" to="/">
             홈
           </NavLink>
-          <NavLink className="nav-item" to="/chat">
+          <NavLink className="nav-item" to="/chatlist">
             채팅
           </NavLink>
           <NavLink className="nav-item" to="/posting">
