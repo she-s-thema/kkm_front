@@ -15,7 +15,7 @@ export const Redirect = () => {
       } else {
         console.log(res.data);
         localStorage.setItem("token", res.data);
-        // window.location.href = "/";
+        window.location.href = "/";
       }
       console.log(res.data);
     });
