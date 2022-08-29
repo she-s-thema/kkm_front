@@ -11,7 +11,7 @@ export const Header = () => {
         <Image
           onClick={goHome}
           alt="logo"
-          src="https://shes-thema.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F13012d72-71b6-4653-95ca-05de21e18e80%2F%EC%9B%8C%EB%93%9C%EB%A7%88%ED%81%AC.png?table=block&id=a73b383b-775b-4cda-ad10-97f9a32d28aa&spaceId=60e632a7-8801-44ae-b321-818e1ed732e6&width=190&userId=&cache=v2"
+          src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F48fb3ffd-bab6-434b-afaa-ae968aacc848%2F1.png?table=block&id=f044398c-b3c1-4e96-a1ff-70e29742482e&spaceId=60e632a7-8801-44ae-b321-818e1ed732e6&width=250&userId=c84a84af-878e-43bd-84c5-2229118608d7&cache=v2"
         />
         <Search placeholder="🔍  내가 입고 싶은 청치마 우리 동네에서 빌릴 수 있을까?" />
         <Nav>
@@ -50,7 +50,7 @@ const Main = styled.div`
 `;
 
 const Image = styled.img`
-  height: 3.5rem;
+  height: 2.5rem;
 `;
 
 const Search = styled.input`
