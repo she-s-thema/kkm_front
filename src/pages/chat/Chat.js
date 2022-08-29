@@ -18,6 +18,7 @@ export const Chat = () => {
 
 const ChatBox = styled.div`
   display: flex;
+  height: 400px;
   width: 400px;
   border: 1px #c4c4c4;
 `;
