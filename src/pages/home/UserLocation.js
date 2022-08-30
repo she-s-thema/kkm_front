@@ -1,16 +1,15 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import user from "../../data/currentUser.json";
 import styled from "styled-components";
+import { userInfo } from "../../data/atom";
 
 export const UserLocation = () => {
+  const ggmInfo = useRecoilValue(userInfo);
   return (
     <LocationBox>
       <Text>
-        최근<b> {user.name}</b>님의 동네
-        <b>
-          {user.locations[0].substring(user.locations[0].indexOf(" ") + 1)}{" "}
-        </b>
+        최근<b> {ggmInfo["nickname"]}</b>님의 동네
+        <b> {ggmInfo["address"]} </b>
         <svg
           width="15"
           height="13"
