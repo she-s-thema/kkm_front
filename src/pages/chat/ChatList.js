@@ -7,7 +7,7 @@ import User from "../../data/chatUser.json";
 
 export const ChatList = () => {
   return (
-    <div>
+    <div style={{ float: "right" }}>
       <ChatBox>
         <h3 style={{ marginLeft: "20px" }}>채팅</h3>
         <ChatCards>
@@ -20,13 +20,16 @@ export const ChatList = () => {
                     <ChatName>{data.name}</ChatName>
                     <ChatContent>{data.content}</ChatContent>
                   </UserInfo>
-                  {data.condition == 1 ? (
-                    <ChatPink>거래 전</ChatPink>
-                  ) : data.condition == 2 ? (
-                    <ChatBlue>거래 중</ChatBlue>
-                  ) : (
-                    <ChatYel>거래 완료</ChatYel>
-                  )}
+                  <ChatButton>
+                    {" "}
+                    {data.condition == 1 ? (
+                      <ChatPink>거래 전</ChatPink>
+                    ) : data.condition == 2 ? (
+                      <ChatBlue>거래 중</ChatBlue>
+                    ) : (
+                      <ChatYel>거래 완료</ChatYel>
+                    )}
+                  </ChatButton>
                 </ChatCard>
               );
               return chatcard;
@@ -40,9 +43,9 @@ export const ChatList = () => {
 
 const ChatBox = styled.div`
   display: block;
-  width: 320px;
+  width: 330px;
   height: 520px;
-  border: 2px solid #c4c4c4;
+  border: 1px solid #c4c4c4;
   border-top: 0px;
 `;
 
@@ -53,6 +56,7 @@ const Name = styled.div`
 
 const ChatCards = styled.div`
   flex-direction: column;
+  width: 310px;
 `;
 
 const ChatCard = styled.div`
@@ -72,45 +76,56 @@ const ChatProfile = styled.img`
 
 const ChatContent = styled.h6`
   color: #404040;
-  text-decoration: none;
-  text-decoration-style: none;
+  font-weight: 400;
+  font-size: 7px;
 `;
 
 const ChatName = styled.h5`
   color: black;
+  font-size: 13px;
 `;
 
 const ChatPink = styled.button`
   border: 2px solid #ffb7d2;
   color: #ffb7d2;
   background-color: white;
-  width: 65px;
-  height: 28px;
+
+  width: 58px;
+  height: 25px;
   border-radius: 80px;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 450;
 `;
 
 const ChatBlue = styled.button`
   border: 2px solid #a5d9ff;
   color: #a5d9ff;
   background-color: white;
-  width: 65px;
-  height: 28px;
+  width: 58px;
+  height: 25px;
   border-radius: 80px;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 450;
 `;
 
 const ChatYel = styled.button`
   border: 2px solid #ffcc66;
   color: #ffcc66;
   background-color: white;
-  width: 65px;
-  height: 28px;
+  width: 58px;
+  height: 25px;
   border-radius: 80px;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 450;
 `;
 
 const UserInfo = styled.div`
   margin-left: 13px;
   display: block;
+  width: 100%;
+`;
+
+const ChatButton = styled.div`
+  display: flex;
+  margin-right: 25px;
 `;
