@@ -15,3 +15,9 @@ export const kakaoUserInfo = atom({
   },
   effects_UNSTABLE: [persistAtom],
 });
+
+export const userInfo = atom({
+  key: "userInfo",
+  default: {},
+  effects_UNSTABLE: [persistAtom],
+});
