@@ -2,22 +2,27 @@ import React, { useEffect } from "react";
 import queryString from "query-string";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { kakaoUserInfo } from "../../data/atom";
+import { kakaoUserInfo, userInfo } from "../../data/atom";
+import setAuthorizationToken from "../../utils/setAuthorizationToken";
+import jwtDecode from "jwt-decode";
 
 export const Redirect = () => {
   const [user, setUser] = useRecoilState(kakaoUserInfo);
+  const [ggmInfo, setGgmInfo] = useRecoilState(userInfo);
 
   const isSignUpUser = async (k_id) => {
-    console.log(k_id);
     await axios.post(`/user/kakaoLogin?k_id=${k_id}`).then((res) => {
       if (res.data === "guest") {
         window.location.href = "/login/moreInfo";
       } else {
-        console.log(res.data);
-        localStorage.setItem("token", res.data);
+        const token = res.data;
+        localStorage.setItem("token", token);
+        setAuthorizationToken(token);
+        setGgmInfo(jwtDecode(token));
+        console.log(ggmInfo);
+
         window.location.href = "/";
       }
-      console.log(res.data);
     });
   };
 
@@ -29,7 +34,6 @@ export const Redirect = () => {
         k_id: String(res.data["k_id"]),
         k_img_url: res.data["k_img_url"],
       });
-      console.log(res.data["k_id"]);
       isSignUpUser(res.data["k_id"]);
     });
   };
@@ -39,5 +43,5 @@ export const Redirect = () => {
 
     getKakaoUserInfo(query.code);
   }, []);
-  return <></>;
+  return <>로딩중</>;
 };
