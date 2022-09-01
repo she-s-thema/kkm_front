@@ -10,7 +10,7 @@ import jwtDecode from "jwt-decode";
 export const MoreInfo = () => {
   const newUser = new FormData();
   const { kakao } = window;
-  const user = useRecoilState(kakaoUserInfo);
+  const user = useRecoilValue(kakaoUserInfo);
   const [ggmInfo, setGgmInfo] = useRecoilState(userInfo);
   const [isClicked, setIsClicked] = useState(false);
   const [nickname, setNickname] = useState("");
@@ -27,12 +27,14 @@ export const MoreInfo = () => {
     await axios.post(`/user/join`, newUser).then((res) => {
       setAuthorizationToken(res.data);
       setGgmInfo(jwtDecode(res.data));
+      localStorage.setItem("token", res.data);
     });
 
     window.location.href = "/";
   };
 
   useEffect(() => {
+    console.log(user["k_img_url"]);
     if (address !== "") {
       // setAddress가 실행됐을 때
       newUser.append("user_id", "0");
