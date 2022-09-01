@@ -19,7 +19,6 @@ export const Redirect = () => {
         localStorage.setItem("token", token);
         setAuthorizationToken(token);
         setGgmInfo(jwtDecode(token));
-        console.log(ggmInfo);
 
         window.location.href = "/";
       }
