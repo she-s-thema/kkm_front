@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import queryString from "query-string";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { kakaoUserInfo, userInfo } from "../../data/atom";
+import { kakaoUserInfo, userInfo } from "../../data/user";
 import setAuthorizationToken from "../../utils/setAuthorizationToken";
 import jwtDecode from "jwt-decode";
 
