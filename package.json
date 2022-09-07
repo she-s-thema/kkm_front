@@ -8,7 +8,9 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "babel-runtime": "^6.26.0",
+    "firebase": "^9.9.4",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "query-string": "^7.1.1",
     "react": "^18.1.0",
     "react-daum-postcode": "^3.1.1",
@@ -48,5 +50,5 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "miragejs": "^0.1.45"
   },
-  "proxy": "http://localhost:3030"
+  "proxy": "http://13.125.234.40:3030/"
 }

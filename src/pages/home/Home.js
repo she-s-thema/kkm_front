@@ -2,6 +2,7 @@ import React from "react";
 import pl from "../../data/postList.json";
 import styled from "styled-components";
 import { UserLocation } from "./UserLocation";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   return (
@@ -11,18 +12,24 @@ export const Home = () => {
         <Cards>
           {pl.map((data) => {
             const card = (
-              <Card key={data.id}>
-                <Image src={data.imgSrc[0]} />
-                <Title>{data.title}</Title>
-                <Address>{data.ownerLocation}</Address>
-                <EndPoint>
-                  <span>{data.rentalPrice}원</span>
-                  <Heart>
-                    <HeartIcon src="../../assets/icons/heart.png" />
-                    <span>{data.heart}</span>
-                  </Heart>
-                </EndPoint>
-              </Card>
+              <Link
+                key={data.id}
+                to={`/post/${data.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Card key={data.id}>
+                  <Image src={data.imgSrc[0]} />
+                  <Title>{data.title}</Title>
+                  <Address>{data.ownerLocation}</Address>
+                  <EndPoint>
+                    <span>{data.rentalPrice}원</span>
+                    <Heart>
+                      <HeartIcon src="../../assets/icons/heart.png" />
+                      <span>{data.heart}</span>
+                    </Heart>
+                  </EndPoint>
+                </Card>
+              </Link>
             );
             return card;
           })}
@@ -53,6 +60,7 @@ const Cards = styled.div`
 
 const Card = styled.div`
   width: 100%;
+  text-decoration: none;
 `;
 
 const Image = styled.img`
@@ -63,6 +71,8 @@ const Image = styled.img`
 `;
 
 const Title = styled.p`
+  color: black;
+  text-decoration: none;
   display: block;
   font-size: 1rem;
   font-weight: bold;

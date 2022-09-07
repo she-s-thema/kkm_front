@@ -1,7 +1,5 @@
-import userEvent from "@testing-library/user-event";
 import React from "react";
-import { Route, Link } from "react-router-dom";
-import { Chat } from "./Chat";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import User from "../../data/chatUser.json";
 
@@ -11,30 +9,34 @@ export const ChatList = () => {
       <ChatBox>
         <h3 style={{ marginLeft: "20px" }}>채팅</h3>
         <ChatCards>
-          <Link to="./chat" style={{ textDecoration: "none" }}>
-            {User.map((data) => {
-              const chatcard = (
-                <ChatCard key={data.id}>
+          {User.map((data) => {
+            const chatcard = (
+              <Link
+                key={data.id}
+                to={`./${data.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <ChatCard>
                   <ChatProfile src={data.profile} />
                   <UserInfo>
                     <ChatName>{data.name}</ChatName>
                     <ChatContent>{data.content}</ChatContent>
                   </UserInfo>
                   <ChatButton>
-                    {" "}
-                    {data.condition == 1 ? (
+                    {/* {" "}
+                    {data.condition === 1 ? (
                       <ChatPink>거래 전</ChatPink>
-                    ) : data.condition == 2 ? (
+                    ) : data.condition === 2 ? (
                       <ChatBlue>거래 중</ChatBlue>
                     ) : (
                       <ChatYel>거래 완료</ChatYel>
-                    )}
+                    )} */}
                   </ChatButton>
                 </ChatCard>
-              );
-              return chatcard;
-            })}
-          </Link>
+              </Link>
+            );
+            return chatcard;
+          })}
         </ChatCards>
       </ChatBox>
     </div>
@@ -85,39 +87,39 @@ const ChatName = styled.h5`
   font-size: 13px;
 `;
 
-const ChatPink = styled.button`
-  border: 2px solid #ffb7d2;
-  color: #ffb7d2;
-  background-color: white;
+// const ChatPink = styled.button`
+//   border: 2px solid #ffb7d2;
+//   color: #ffb7d2;
+//   background-color: white;
 
-  width: 58px;
-  height: 25px;
-  border-radius: 80px;
-  font-size: 11px;
-  font-weight: 450;
-`;
+//   width: 58px;
+//   height: 25px;
+//   border-radius: 80px;
+//   font-size: 11px;
+//   font-weight: 450;
+// `;
 
-const ChatBlue = styled.button`
-  border: 2px solid #a5d9ff;
-  color: #a5d9ff;
-  background-color: white;
-  width: 58px;
-  height: 25px;
-  border-radius: 80px;
-  font-size: 11px;
-  font-weight: 450;
-`;
+// const ChatBlue = styled.button`
+//   border: 2px solid #a5d9ff;
+//   color: #a5d9ff;
+//   background-color: white;
+//   width: 58px;
+//   height: 25px;
+//   border-radius: 80px;
+//   font-size: 11px;
+//   font-weight: 450;
+// `;
 
-const ChatYel = styled.button`
-  border: 2px solid #ffcc66;
-  color: #ffcc66;
-  background-color: white;
-  width: 58px;
-  height: 25px;
-  border-radius: 80px;
-  font-size: 11px;
-  font-weight: 450;
-`;
+// const ChatYel = styled.button`
+//   border: 2px solid #ffcc66;
+//   color: #ffcc66;
+//   background-color: white;
+//   width: 58px;
+//   height: 25px;
+//   border-radius: 80px;
+//   font-size: 11px;
+//   font-weight: 450;
+// `;
 
 const UserInfo = styled.div`
   margin-left: 13px;
