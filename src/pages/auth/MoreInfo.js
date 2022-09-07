@@ -34,7 +34,6 @@ export const MoreInfo = () => {
   };
 
   useEffect(() => {
-    console.log(user["k_img_url"]);
     if (address !== "") {
       // setAddress가 실행됐을 때
       newUser.append("user_id", "0");
