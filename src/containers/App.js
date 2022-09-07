@@ -12,6 +12,7 @@ import { IsLogin } from "../components/IsLogin";
 import { PostDetail } from "../pages/home/PostDetail";
 import queryString from "query-string";
 import { Chat } from "../pages/chat/Chat";
+import { Test } from "../components/Test";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/auth/kakao/*" element={<Redirect />} />
           <Route path="/login/moreInfo" element={<MoreInfo />} />
           <Route path="/post/:id" element={<PostDetail />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
