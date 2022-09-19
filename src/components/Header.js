@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -18,7 +18,7 @@ export const Header = () => {
           <NavLink className="nav-item" to="/">
             홈
           </NavLink>
-          <NavLink className="nav-item" to="/chatlist">
+          <NavLink className="nav-item" to="/chat">
             채팅
           </NavLink>
           <NavLink className="nav-item" to="/posting">

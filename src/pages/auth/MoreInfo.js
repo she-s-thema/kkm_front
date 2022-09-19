@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { kakaoUserInfo, userInfo } from "../../data/atom";
+import { kakaoUserInfo, userInfo } from "../../data/user";
 import setAuthorizationToken from "../../utils/setAuthorizationToken";
 import jwtDecode from "jwt-decode";
 
 export const MoreInfo = () => {
   const newUser = new FormData();
   const { kakao } = window;
-  const user = useRecoilState(kakaoUserInfo);
+  const user = useRecoilValue(kakaoUserInfo);
   const [ggmInfo, setGgmInfo] = useRecoilState(userInfo);
   const [isClicked, setIsClicked] = useState(false);
   const [nickname, setNickname] = useState("");
@@ -27,6 +27,7 @@ export const MoreInfo = () => {
     await axios.post(`/user/join`, newUser).then((res) => {
       setAuthorizationToken(res.data);
       setGgmInfo(jwtDecode(res.data));
+      localStorage.setItem("token", res.data);
     });
 
     window.location.href = "/";

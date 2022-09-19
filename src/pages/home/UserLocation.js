@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { userInfo } from "../../data/atom";
+import { userInfo } from "../../data/user";
 
 export const UserLocation = () => {
   const ggmInfo = useRecoilValue(userInfo);
