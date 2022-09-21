@@ -1,38 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import pl from "../../data/postList.json";
 import styled from "styled-components";
 import { UserLocation } from "./UserLocation";
 import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { userInfo } from "../../data/user";
+import axios from "axios";
 
 export const Home = () => {
+  const user = useRecoilValue(userInfo);
+  const API_ADD = `/post/townlist?lon=${user["lon"]}&lat=${user["lat"]}`;
+  const [posts, setPosts] = useState("");
+  const getPosts = async () => {
+    await axios.get(API_ADD).then((data) => {
+      setPosts(() => data["data"]);
+    });
+  };
+
+  useEffect(() => {
+    if (posts === "") getPosts();
+    else;
+  }, [posts]);
+
   return (
     <HomeBox>
       <Article>
         <UserLocation />
         <Cards>
-          {pl.map((data) => {
-            const card = (
-              <Link
-                key={data.id}
-                to={`/post/${data.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <Card key={data.id}>
-                  <Image src={data.imgSrc[0]} />
-                  <Title>{data.title}</Title>
-                  <Address>{data.ownerLocation}</Address>
-                  <EndPoint>
-                    <span>{data.rentalPrice}원</span>
-                    <Heart>
-                      <HeartIcon src="../../assets/icons/heart.png" />
-                      <span>{data.heart}</span>
-                    </Heart>
-                  </EndPoint>
-                </Card>
-              </Link>
-            );
-            return card;
-          })}
+          {posts !== "" ? (
+            posts.map((data) => {
+              const card = (
+                <Link
+                  key={data.post_id}
+                  to={`/post/${data.post_id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Card key={data.post_id}>
+                    <Image src={data.image_1} />
+                    <Title>{data.title}</Title>
+                    {/* <Address>{data.ownerLocatiousern}</Address> */}
+                    <EndPoint>
+                      <span>{data.cost}원</span>
+                      <Heart>
+                        <HeartIcon src="../../assets/icons/heart.png" />
+                        {/* <span>{data.heart}</span> */}
+                      </Heart>
+                    </EndPoint>
+                  </Card>
+                </Link>
+              );
+              return card;
+            })
+          ) : (
+            <></>
+          )}
         </Cards>
       </Article>
     </HomeBox>
