@@ -21,9 +21,9 @@ export const Post = () => {
   const newPost = new FormData();
   newPost.append("post_id", 0);
   newPost.append("post_owner_id", user["user_id"]);
-  newPost.append("image_1", 0);
-  newPost.append("image_2", 0);
-  newPost.append("image_3", 0);
+  newPost.append("image_1", "");
+  newPost.append("image_2", "");
+  newPost.append("image_3", "");
   newPost.append("state", 0);
   newPost.append("type", 0);
 
@@ -130,20 +130,6 @@ export const Post = () => {
         style={{ display: "none" }}
         onChange={handleChange}
       />
-      {/* <button onClick={(e) => handleButtonClick(e, 1)}>사진2</button>
-      <input
-        type="file"
-        ref={fileInput}
-        style={{ display: "none" }}
-        onChange={handleChange}
-      />
-      <button onClick={(e) => handleButtonClick(e, 2)}>사진3</button>
-      <input
-        type="file"
-        ref={fileInput}
-        style={{ display: "none" }}
-        onChange={handleChange}
-      /> */}
       <textarea
         onChange={(e) => setDesc(e.target.value)}
         placeholder="description"
