@@ -40,6 +40,7 @@ const HeaderBox = styled.header`
   justify-content: center;
   align-items: center;
   background-color: white;
+  border-bottom: 0.5px solid gray;
 `;
 
 const Main = styled.div`
