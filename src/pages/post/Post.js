@@ -1,24 +1,29 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userInfo } from "../../data/user";
 
 export const Post = () => {
   const fileInput = useRef(null);
-  const [user, setUser] = useRecoilState(userInfo);
+  const user = useRecoilValue(userInfo);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [cost, setCost] = useState(0);
-  const [clickNum, setClickNum] = useState(0);
-  const [fileList, setFileList] = useState([]);
+  const [clickNum, setClickNum] = useState(1);
+  const [fileList, setFileList] = useState({
+    img1: "",
+    img2: "",
+    img3: "",
+  });
+  const [isSelected, setIsSelected] = useState(false);
 
   const imgList = new FormData();
   const newPost = new FormData();
   newPost.append("post_id", 0);
   newPost.append("post_owner_id", user["user_id"]);
-  newPost.append("image_1", 0);
-  newPost.append("image_2", 0);
-  newPost.append("image_3", 0);
+  newPost.append("image_1", "");
+  newPost.append("image_2", "");
+  newPost.append("image_3", "");
   newPost.append("state", 0);
   newPost.append("type", 0);
 
@@ -32,11 +37,19 @@ export const Post = () => {
 
   // file이 선택될 때 마다 실행되는 함수
   const handleChange = (e) => {
+    setClickNum(clickNum + 1);
+    setIsSelected(true);
     const file = e.target.files;
     const fileType = file[0].type.substr(6, 15);
 
     if (fileType === "png" || fileType === "jpg" || fileType === "jpeg") {
-      setFileList((prev) => [...prev, file[0]]);
+      if (clickNum === 1) setFileList({ ...fileList, img1: file });
+      else if (clickNum === 2) setFileList({ ...fileList, img2: file });
+      else if (clickNum === 3) {
+        setFileList({ ...fileList, img3: file });
+        setClickNum(1);
+      }
+
       let reader = new FileReader();
       reader.readAsDataURL(file[0]);
       reader.onload = () => {
@@ -49,38 +62,51 @@ export const Post = () => {
   };
 
   // 사진 업로드 버튼 누를 시 파일 선택 화면으로 이동
-  const handleButtonClick = (e, num) => {
+  const handleButtonClick = (e) => {
     fileInput.current.click();
-    setClickNum(num);
   };
 
   // server에 post info 전달
   const submitInfo = async () => {
-    let post_id;
-    let today = new Date();
-    let year = today.getFullYear();
-    let month = ("0" + (today.getMonth() + 1)).slice(-2);
-    let day = ("0" + today.getDate()).slice(-2);
-    let dateString = year + "-" + month + "-" + day;
-    let hours = ("0" + today.getHours()).slice(-2);
-    let minutes = ("0" + today.getMinutes()).slice(-2);
-    let seconds = ("0" + today.getSeconds()).slice(-2);
-    let timeString = hours + ":" + minutes + ":" + seconds;
-    newPost.append("title", title);
-    newPost.append("description", desc);
-    newPost.append("cost", cost);
-    newPost.append("writetime", `${dateString} ${timeString}`);
-    await axios.post("/post", newPost).then((id) => (post_id = id.data));
+    if (title === "") alert("제목을 설정해주세요.");
+    else if (!isSelected) alert("사진이 선택되지 않았습니다.");
+    else if (desc === "") alert("상세 설명을 설정해주세요.");
+    else if (cost === 0 || cost === "") alert("대여비를 설정해주세요.");
+    else {
+      let post_id;
+      let today = new Date();
+      let year = today.getFullYear();
+      let month = ("0" + (today.getMonth() + 1)).slice(-2);
+      let day = ("0" + today.getDate()).slice(-2);
+      let dateString = year + "-" + month + "-" + day;
+      let hours = ("0" + today.getHours()).slice(-2);
+      let minutes = ("0" + today.getMinutes()).slice(-2);
+      let seconds = ("0" + today.getSeconds()).slice(-2);
+      let timeString = hours + ":" + minutes + ":" + seconds;
+      newPost.append("title", title);
+      newPost.append("description", desc);
+      newPost.append("cost", cost);
+      newPost.append("writetime", `${dateString} ${timeString}`);
+      await axios.post("/post", newPost).then((id) => (post_id = id.data));
 
-    fileList.slice(-3).forEach((file) => imgList.append("multipartFile", file));
-    await axios({
-      method: "put",
-      url: `/s3/file?post_id=${post_id}`,
-      data: imgList,
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    window.location.href = "/";
+      if (fileList.img1 !== "")
+        imgList.append("multipartFile", fileList.img1[0]);
+      if (fileList.img2 !== "")
+        imgList.append("multipartFile", fileList.img2[0]);
+      if (fileList.img3 !== "")
+        imgList.append("multipartFile", fileList.img3[0]);
+
+      await axios({
+        method: "put",
+        url: `/s3/file?post_id=${post_id}`,
+        data: imgList,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      alert("글 작성 완료");
+      window.location.href = "/";
+    }
   };
+
   return (
     <div>
       <input
@@ -97,21 +123,7 @@ export const Post = () => {
         type="text"
         placeholder="title"
       />
-      <button onClick={(e) => handleButtonClick(e, 1)}>사진1</button>
-      <input
-        type="file"
-        ref={fileInput}
-        style={{ display: "none" }}
-        onChange={handleChange}
-      />
-      <button onClick={(e) => handleButtonClick(e, 2)}>사진2</button>
-      <input
-        type="file"
-        ref={fileInput}
-        style={{ display: "none" }}
-        onChange={handleChange}
-      />
-      <button onClick={(e) => handleButtonClick(e, 3)}>사진3</button>
+      <button onClick={(e) => handleButtonClick(e, 0)}>사진1</button>
       <input
         type="file"
         ref={fileInput}
