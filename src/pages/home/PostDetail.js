@@ -28,7 +28,7 @@ export const PostDetail = () => {
     });
 
     await axios
-      .get(`/getUserProfile?post_id=${post_id}`)
+      .get(`/getUserProfile/${post_id}`)
       .then((data) => setPostOwnerInfo(data.data));
   };
   useEffect(() => {
@@ -82,7 +82,7 @@ const UserBox = styled.div`
 
 const Article = styled.div`
   display: flex;
-  height: 60%;
+  aspect-ratio: 2 / 1;
   justify-content: space-between;
   margin-top: 10px;
 `;
@@ -102,6 +102,7 @@ const Image = styled.img`
   width: 49%;
   height: 100%;
   object-fit: contain;
+  aspect-ratio: auto 1 / 1;
   background-color: black;
 `;
 
