@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import pl from "../../data/postList.json";
 import styled from "styled-components";
 import { UserLocation } from "./UserLocation";
 import { Link } from "react-router-dom";
@@ -27,7 +26,7 @@ export const Home = () => {
       <Article>
         <UserLocation />
         <Cards>
-          {posts !== "" ? (
+          {posts !== "" &&
             posts.map((data) => {
               const card = (
                 <Link
@@ -50,10 +49,7 @@ export const Home = () => {
                 </Link>
               );
               return card;
-            })
-          ) : (
-            <></>
-          )}
+            })}
         </Cards>
       </Article>
     </HomeBox>
