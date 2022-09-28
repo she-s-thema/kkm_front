@@ -21,6 +21,7 @@ export const PostDetail = () => {
   const [postOwnerInfo, setPostOwnerInfo] = useState([
     { nickname: "", k_img_url: "../../assets/images/loading.png" },
   ]);
+  const [heart, setHeart] = useState(0);
 
   const getDetailInfo = async () => {
     await axios.get(`/post/getDetail?post_id=${post_id}`).then((data) => {
@@ -30,6 +31,8 @@ export const PostDetail = () => {
     await axios
       .get(`/getUserProfile/${post_id}`)
       .then((data) => setPostOwnerInfo(data.data));
+
+    await axios.get(`/heart/${post_id}`).then((hea) => setHeart(hea.data));
   };
   useEffect(() => {
     getDetailInfo();
@@ -49,7 +52,13 @@ export const PostDetail = () => {
             {/* {dataInfo["image_3"] !== "" && <Image src={dataInfo["image_3"]} />} */}
           </ImageBox>
           <Info>
-            <Title>{dataInfo["title"]}</Title>
+            <InfoHead>
+              <Title>{dataInfo["title"]}</Title>
+              <Heart>
+                <HeartIcon src="../../assets/icons/heart.png" />
+                <span>{heart}</span>
+              </Heart>
+            </InfoHead>
             <SubTitle>대여 가격</SubTitle>
             <Cost>
               <span>{dataInfo["cost"]}</span>
@@ -141,7 +150,7 @@ const Nickname = styled.span`
 const Title = styled.span`
   line-height: 100%;
   font-weight: 500;
-  font-size: 30px;
+  font-size: 24px;
 `;
 
 const SubTitle = styled.span`
@@ -181,4 +190,23 @@ const ChatBtn = styled.button`
   background: #595fff;
   border-radius: 35px;
   cursor: pointer;
+`;
+
+const Heart = styled.div`
+  display: flex;
+  align-items: center;
+  color: #646fd4;
+`;
+
+const HeartIcon = styled.img`
+  width: 20px;
+  margin-top: 1px;
+  margin-right: 4px;
+`;
+
+const InfoHead = styled.section`
+  display: flex;
+  width: 95%;
+  align-items: center;
+  justify-content: space-between;
 `;
