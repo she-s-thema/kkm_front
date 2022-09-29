@@ -1,29 +1,21 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { userInfo } from "../../data/user";
 import axios from "axios";
 import { Postings } from "./Postings";
+import { useQuery } from "react-query";
 
 export const Home = () => {
   const user = useRecoilValue(userInfo);
   const API_ADD = `/getPostList?lon=${user["lon"]}&lat=${user["lat"]}`;
-  const [posts, setPosts] = useState("");
-  const getPosts = async () => {
-    await axios.get(API_ADD).then((data) => {
-      setPosts(() => data["data"]);
-    });
-  };
+  const getPosts = () => axios.get(API_ADD).then((data) => data["data"]);
 
-  useMemo(() => getPosts, [posts]);
-
-  useEffect(() => {
-    getPosts();
-  }, []);
+  const postQuery = useQuery(["posts"], getPosts);
 
   return (
     <HomeBox>
-      <Postings posts={posts} />
+      {postQuery.isSuccess && <Postings posts={postQuery.data} />}
     </HomeBox>
   );
 };
