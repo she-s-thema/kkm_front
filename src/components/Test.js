@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from "react";
-import firestore, { createChannel } from "../utils/firebase";
-import moment from "moment";
+import axios from "axios";
+import React, { memo } from "react";
+import { useQuery } from "react-query";
+import { useRecoilValue } from "recoil";
+import { userInfo } from "../data/user";
 
-export const Test = () => {
-  const getDateOrTime = (ts) => {
-    const now = moment().startOf("day");
-    const target = moment(ts).startOf("day");
-    return moment(ts).format(now.diff(target, "days") > 0 ? "MM/DD" : "HH:mm");
+export const Test = memo(() => {
+  const user = useRecoilValue(userInfo);
+  const API_ADD = `/post/townlist?lon=${user["lon"]}&lat=${user["lat"]}`;
+
+  const getPosts = async () => {
+    const { data } = await axios.get(API_ADD);
+    return data;
   };
-  useEffect(() => {
-    // const bucket = firestore.collection("channels");
-    // bucket
-    //   .collection("messages")
-    //   .add({ createAt: "", description: "", id: "", title: "test" })
-    //   .then((docRef) => {
-    //     // 새로운 document의 id
-    //     console.log(docRef.id);
-    //   });
 
-    console.log(createChannel("hi", "test"));
-  });
+  const query = useQuery("posts", getPosts);
+  console.log(query);
+
   return (
-    <div>
-      <input type="text" />
-      <button>전송</button>
-    </div>
+    <>
+      {!query.isLoading &&
+        query.data.map((data) => <h3 key={data.post_id}>{data.title}</h3>)}
+    </>
   );
-};
+});

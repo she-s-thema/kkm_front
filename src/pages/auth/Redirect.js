@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { kakaoUserInfo, userInfo } from "../../data/user";
 import setAuthorizationToken from "../../utils/setAuthorizationToken";
 import jwtDecode from "jwt-decode";
+import { getUserId } from "../../utils/getUserId";
 
 export const Redirect = () => {
   const [user, setUser] = useRecoilState(kakaoUserInfo);
@@ -19,6 +20,12 @@ export const Redirect = () => {
         localStorage.setItem("token", token);
         setAuthorizationToken(token);
         setGgmInfo(jwtDecode(token));
+        getUserId(jwtDecode(token)["k_id"]).then((id) =>
+          setUser({
+            ...user,
+            user_id: id,
+          })
+        );
 
         window.location.href = "/";
       }

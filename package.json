@@ -15,6 +15,7 @@
     "react": "^18.1.0",
     "react-daum-postcode": "^3.1.1",
     "react-dom": "^18.1.0",
+    "react-query": "^3.39.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "recoil": "^0.7.5",
@@ -50,5 +51,5 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "miragejs": "^0.1.45"
   },
-  "proxy": "http://13.125.234.40:3031"
+  "proxy": "http://localhost:3031/"
 }
