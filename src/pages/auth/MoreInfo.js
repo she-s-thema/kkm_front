@@ -40,6 +40,7 @@ export const MoreInfo = () => {
       newUser.append("k_id", user["k_id"]);
       newUser.append("k_img_url", user["k_img_url"].replace(/['"]/g, ""));
       newUser.append("nickname", nickname);
+      newUser.append("kkm", 0);
       var geocoder = new kakao.maps.services.Geocoder();
       geocoder.addressSearch(address, function (result, status) {
         if (status === kakao.maps.services.Status.OK) {
