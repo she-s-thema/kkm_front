@@ -51,5 +51,5 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "miragejs": "^0.1.45"
   },
-  "proxy": "http://localhost:3031/"
+  "proxy": "http://54.180.120.117:3031/"
 }
