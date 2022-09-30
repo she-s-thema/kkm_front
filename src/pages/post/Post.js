@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userInfo } from "../../data/user";
+import styled from "styled-components";
 
 export const Post = () => {
   const fileInput = useRef(null);
@@ -108,34 +109,49 @@ export const Post = () => {
   };
 
   return (
-    <div>
-      <input
-        id="fileList"
-        type="file"
-        multiple={true}
-        style={{ display: "none" }}
-      />
-      <img id="img1" width={300} />
-      <img id="img2" width={300} />
-      <img id="img3" width={300} />
-      <input
-        onChange={(e) => setTitle(e.target.value)}
-        type="text"
-        placeholder="title"
-      />
-      <button onClick={(e) => handleButtonClick(e, 0)}>사진1</button>
-      <input
-        type="file"
-        ref={fileInput}
-        style={{ display: "none" }}
-        onChange={handleChange}
-      />
-      <textarea
-        onChange={(e) => setDesc(e.target.value)}
-        placeholder="description"
-      />
-      <input onChange={isNum} type="text" placeholder="cost" />
-      <button onClick={submitInfo}>글 업로드</button>
-    </div>
+    <LoginBox>
+      <Article>
+        <input
+          id="fileList"
+          type="file"
+          multiple={true}
+          style={{ display: "none" }}
+        />
+        <img id="img1" width={300} />
+        <img id="img2" width={300} />
+        <img id="img3" width={300} />
+        <input
+          onChange={(e) => setTitle(e.target.value)}
+          type="text"
+          placeholder="title"
+        />
+        <button onClick={(e) => handleButtonClick(e, 0)}>사진1</button>
+        <input
+          type="file"
+          ref={fileInput}
+          style={{ display: "none" }}
+          onChange={handleChange}
+        />
+        <textarea
+          onChange={(e) => setDesc(e.target.value)}
+          placeholder="description"
+        />
+        <input onChange={isNum} type="text" placeholder="cost" />
+        <button onClick={submitInfo}>글 업로드</button>
+      </Article>
+    </LoginBox>
   );
 };
+
+const Article = styled.div`
+  width: 50%;
+  height: 100%;
+  padding: 0 10% 10% 10%;
+  background-color: white;
+`;
+
+const LoginBox = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`;

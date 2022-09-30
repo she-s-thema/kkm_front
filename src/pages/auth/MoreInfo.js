@@ -54,31 +54,45 @@ export const MoreInfo = () => {
   }, [address]);
 
   return (
-    <div>
-      <ProfileImg src={user["k_img_url"].replace(/['"]/g, "")} />
-      <span>닉네임 설정</span>
-      <input
-        type="text"
-        placeholder="닉네임 설정 2 ~ 10자"
-        onChange={(e) => {
-          setNickname(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          setIsClicked((prev) => !prev);
-        }}
-      >
-        위치 설정
-      </button>
-      {isClicked && (
-        <DaumPostcodeEmbed onComplete={completeHandler} autoClose={false} />
-      )}
-      {address}
-      <button type="button" onClick={signUp}>
-        회원가입
-      </button>
-    </div>
+    <LoginBox>
+      <Article>
+        <div>
+          <ProfileImg src={user["k_img_url"].replace(/['"]/g, "")} />
+        </div>
+        <Nickname>
+          <div>
+            <span>닉네임 설정</span>
+          </div>
+          <div>
+            <Input
+              type="text"
+              placeholder="닉네임 설정 2 ~ 10자"
+              onChange={(e) => {
+                setNickname(e.target.value);
+              }}
+            />
+          </div>
+        </Nickname>
+        <div>
+          <Pbutton
+            onClick={() => {
+              setIsClicked((prev) => !prev);
+            }}
+          >
+            위치 설정
+          </Pbutton>
+          {isClicked && (
+            <DaumPostcodeEmbed onComplete={completeHandler} autoClose={false} />
+          )}
+          {address}
+        </div>
+        <div>
+          <Sbutton type="button" onClick={signUp}>
+            회원가입
+          </Sbutton>
+        </div>
+      </Article>
+    </LoginBox>
   );
 };
 
@@ -87,4 +101,52 @@ const ProfileImg = styled.img`
   height: 100px;
   border-radius: 100px;
   object-fit: cover;
+`;
+
+const Article = styled.div`
+  width: 17%;
+  height: 50%;
+  padding: 4% 10% 4% 10%;
+  background-color: #e9f0ff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const LoginBox = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`;
+
+const Input = styled.input`
+  border: 0;
+  padding: 5px;
+  padding-left: 10px;
+  width: 60%;
+  border-radius: 15px;
+  width: 185px;
+  height: 20px;
+`;
+
+const Nickname = styled.div`
+  width: 100%;
+`;
+
+const Pbutton = styled.button`
+  display: flex;
+  border: 0;
+  background-color: #e9f0ff;
+  font-size: 16px;
+`;
+
+const Sbutton = styled.button`
+  display: flex;
+  border: 0;
+  background-color: #6573f5;
+  color: #fff;
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 20px;
 `;
