@@ -13,6 +13,7 @@ import { PostDetail } from "../pages/home/PostDetail";
 import { Chat } from "../pages/chat/Chat";
 import { Test } from "../components/Test";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Channels } from "../pages/chat/Channels";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -24,8 +25,8 @@ export default function App() {
           <Header />
           <Routes>
             <Route exact path="/" element={<IsLogin />} />
-            <Route path="/chat" element={<ChatList />} />
-            <Route path="/chat/:id" element={<Chat />} />
+            <Route path="/chat" element={<Channels />} />
+            <Route path="/chat/:ch_id" element={<Chat />} />
             <Route path="/posting" element={<Post />} />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/login" element={<Login />} />
