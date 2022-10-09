@@ -51,6 +51,7 @@ export const Chat = () => {
 
     await updateDoc(channelRef, {
       sendAt: sendTime,
+      lastText: sendText,
     });
   };
 
