@@ -1,23 +1,26 @@
 import axios from "axios";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { BackButton } from "../../components/BackButton";
+import db from "../../config/firebaseConfig";
+import { userInfo } from "../../data/user";
 
 export const PostDetail = () => {
-  const post_id = window.location.pathname.slice(6);
-  const [dataInfo, setDataInfo] = useState({
-    cost: 0,
-    description: "",
-    image_1: "../../assets/images/loading.png",
-    image_2: "",
-    image_3: "",
-    post_id: post_id,
-    post_owner_id: 0,
-    state: 0,
-    title: "",
-    type: 0,
-    writetime: "",
-  });
+  const user = useRecoilValue(userInfo);
+  const user_id = user["user_id"];
+  const { post_id } = useParams();
+  const [dataInfo, setDataInfo] = useState();
   const [postOwnerInfo, setPostOwnerInfo] = useState([
     { nickname: "", k_img_url: "../../assets/images/loading.png" },
   ]);
@@ -34,46 +37,93 @@ export const PostDetail = () => {
 
     await axios.get(`/heart/${post_id}`).then((hea) => setHeart(hea.data));
   };
+
+  const newChannel = async () => {
+    if (postOwnerInfo[0].user_id === user_id) {
+      alert("자기 자신과의 대화는 중요하죠.");
+    } else {
+      const q = query(
+        collection(db, "channels"),
+        where("loaner_id", "==", user_id),
+        where("owner_id", "==", postOwnerInfo[0].user_id)
+      );
+
+      const q2 = query(
+        collection(db, "channels"),
+        where("loaner_id", "==", postOwnerInfo[0].user_id),
+        where("owner_id", "==", user_id)
+      );
+
+      const querySnapshot = await getDocs(q);
+      const querySnapshot2 = await getDocs(q2);
+
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach(
+          (doc) => (window.location.href = `/chat/${doc.data().id}`)
+        );
+      } else if (!querySnapshot2.empty) {
+        querySnapshot2.forEach(
+          (doc) => (window.location.href = `/chat/${doc.data().id}`)
+        );
+      } else {
+        const newChRef = doc(collection(db, "channels"));
+        const createdTime = new Date();
+        console.log(user_id);
+        await setDoc(newChRef, {
+          id: newChRef.id,
+          createdAt: createdTime,
+          loaner_id: user_id,
+          owner_id: postOwnerInfo[0].user_id,
+        });
+        window.location.href = `/chat/${newChRef.id}`;
+      }
+    }
+  };
+
   useEffect(() => {
     getDetailInfo();
   }, []);
   return (
     <Frame>
-      <ArticleBox>
-        <UserBox>
-          <BackButton />
-          <KProfileImg src={postOwnerInfo[0].k_img_url} />
-          <Nickname>{postOwnerInfo[0].nickname}</Nickname>
-        </UserBox>
-        <Article>
-          <ImageBox>
-            {dataInfo["image_1"] !== "" && <Image src={dataInfo["image_1"]} />}
-            {/* {dataInfo["image_2"] !== "" && <Image src={dataInfo["image_2"]} />} */}
-            {/* {dataInfo["image_3"] !== "" && <Image src={dataInfo["image_3"]} />} */}
-          </ImageBox>
-          <Info>
-            <InfoHead>
-              <Title>{dataInfo["title"]}</Title>
-              <Heart>
-                <HeartIcon src="../../assets/icons/heart.png" />
-                <span>{heart}</span>
-              </Heart>
-            </InfoHead>
-            <SubTitle>대여 가격</SubTitle>
-            <Cost>
-              <span>{dataInfo["cost"]}</span>
-              <span>₩</span>
-            </Cost>
-            <SubTitle>상품 설명</SubTitle>
-            <Desc>
-              <span>{dataInfo["description"]}</span>
-            </Desc>
-            <ButtonBox>
-              <ChatBtn>대화하기</ChatBtn>
-            </ButtonBox>
-          </Info>
-        </Article>
-      </ArticleBox>
+      {dataInfo && (
+        <ArticleBox>
+          <UserBox>
+            <BackButton />
+            <KProfileImg src={postOwnerInfo[0].k_img_url} />
+            <Nickname>{postOwnerInfo[0].nickname}</Nickname>
+          </UserBox>
+          <Article>
+            <ImageBox>
+              {dataInfo["image_1"] !== "" && (
+                <Image src={dataInfo["image_1"]} />
+              )}
+              {/* {dataInfo["image_2"] !== "" && <Image src={dataInfo["image_2"]} />} */}
+              {/* {dataInfo["image_3"] !== "" && <Image src={dataInfo["image_3"]} />} */}
+            </ImageBox>
+            <Info>
+              <InfoHead>
+                <Title>{dataInfo["title"]}</Title>
+                <Heart>
+                  <HeartIcon src="../../assets/icons/heart.png" />
+                  <span>{heart}</span>
+                </Heart>
+              </InfoHead>
+              <SubTitle>대여 가격</SubTitle>
+              <Cost>
+                <span>{dataInfo["cost"]}</span>
+                <span>₩</span>
+              </Cost>
+              <SubTitle>상품 설명</SubTitle>
+              <Desc>
+                <span>{dataInfo["description"]}</span>
+              </Desc>
+              <ButtonBox>
+                <ChatBtn onClick={newChannel}>대화하기</ChatBtn>
+              </ButtonBox>
+            </Info>
+          </Article>
+        </ArticleBox>
+      )}
     </Frame>
   );
 };
