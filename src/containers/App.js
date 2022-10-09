@@ -32,7 +32,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/auth/kakao/*" element={<Redirect />} />
             <Route path="/login/moreInfo" element={<MoreInfo />} />
-            <Route path="/post/:id" element={<PostDetail />} />
+            <Route path="/post/:post_id" element={<PostDetail />} />
             <Route path="/test" element={<Test />} />
           </Routes>
         </BrowserRouter>
