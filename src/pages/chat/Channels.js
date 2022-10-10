@@ -3,7 +3,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import db from "../../config/firebaseConfig";
+import * as S from "./chat.style";
 import { userInfo } from "../../data/user";
+import moment from "moment";
 
 export const Channels = () => {
   const [channels, setChannels] = useState([]);
@@ -55,18 +57,41 @@ export const Channels = () => {
   }, [ownerChat, loanerChat]);
 
   return (
-    <div>
-      {channels &&
-        channels.map((data) => (
-          <div key={data.id}>
-            <Link to={`${data.id}`}>
-              <span>
-                {data.loaner_id === user_id ? data.owner_id : data.loaner_id}
-              </span>
-              <span>{data.lastText}</span>
-            </Link>
-          </div>
-        ))}
-    </div>
+    <S.ChatBox>
+      <S.ChatCards>
+        {channels &&
+          channels.map((data) => (
+            <div key={data.id}>
+              <Link to={`${data.id}`} style={{ textDecoration: "none" }}>
+                <S.ChatCard>
+                  <S.ChatProfile
+                    src={
+                      data.loaner_id === user_id
+                        ? data.owner_profile
+                        : data.loaner_profile
+                    }
+                  />
+                  <S.UserInfo>
+                    <S.ChatName>
+                      {data.loaner_id === user_id
+                        ? data.owner_name
+                        : data.loaner_name}
+                    </S.ChatName>
+                    <S.SubInfo>
+                      <S.ChatContent>{data.lastText}</S.ChatContent>
+                      <S.MidLine>·</S.MidLine>
+                      <S.Time>
+                        {moment(data.sendAt.toDate().toString()).format(
+                          "hh시 mm분"
+                        )}
+                      </S.Time>
+                    </S.SubInfo>
+                  </S.UserInfo>
+                </S.ChatCard>
+              </Link>
+            </div>
+          ))}
+      </S.ChatCards>
+    </S.ChatBox>
   );
 };
