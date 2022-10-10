@@ -50,8 +50,8 @@ const Cards = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1.2rem;
+  grid-template-columns: 32% 32% 32%;
+  grid-gap: 2%;
 `;
 
 const Card = styled.div`
