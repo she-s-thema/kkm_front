@@ -18,7 +18,6 @@ import { userInfo } from "../../data/user";
 
 export const PostDetail = () => {
   const user = useRecoilValue(userInfo);
-  const user_id = user["user_id"];
   const { post_id } = useParams();
   const [dataInfo, setDataInfo] = useState();
   const [postOwnerInfo, setPostOwnerInfo] = useState([
@@ -39,19 +38,19 @@ export const PostDetail = () => {
   };
 
   const newChannel = async () => {
-    if (postOwnerInfo[0].user_id === user_id) {
+    if (postOwnerInfo[0].user_id === user["user_id"]) {
       alert("자기 자신과의 대화는 중요하죠.");
     } else {
       const q = query(
         collection(db, "channels"),
-        where("loaner_id", "==", user_id),
+        where("loaner_id", "==", user["user_id"]),
         where("owner_id", "==", postOwnerInfo[0].user_id)
       );
 
       const q2 = query(
         collection(db, "channels"),
         where("loaner_id", "==", postOwnerInfo[0].user_id),
-        where("owner_id", "==", user_id)
+        where("owner_id", "==", user["user_id"])
       );
 
       const querySnapshot = await getDocs(q);
@@ -68,12 +67,15 @@ export const PostDetail = () => {
       } else {
         const newChRef = doc(collection(db, "channels"));
         const createdTime = new Date();
-        console.log(user_id);
         await setDoc(newChRef, {
           id: newChRef.id,
           createdAt: createdTime,
-          loaner_id: user_id,
+          loaner_id: user["user_id"],
+          loaner_profile: user["k_img_url"],
+          loaner_name: user["nickname"],
           owner_id: postOwnerInfo[0].user_id,
+          owner_profile: postOwnerInfo[0].k_img_url,
+          owner_name: postOwnerInfo[0].nickname,
         });
         window.location.href = `/chat/${newChRef.id}`;
       }
