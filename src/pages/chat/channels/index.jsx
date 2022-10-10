@@ -2,9 +2,9 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import db from "../../config/firebaseConfig";
-import * as S from "./chat.style";
-import { userInfo } from "../../data/user";
+import db from "../../../config/firebaseConfig";
+import * as S from "../chat.style";
+import { userInfo } from "../../../data/user";
 import moment from "moment";
 
 export const Channels = () => {

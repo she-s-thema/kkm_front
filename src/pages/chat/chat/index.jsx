@@ -11,8 +11,8 @@ import React, { useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import db from "../../config/firebaseConfig";
-import { userInfo } from "../../data/user";
+import db from "../../../config/firebaseConfig";
+import { userInfo } from "../../../data/user";
 
 export const Chat = () => {
   const { ch_id } = useParams();
