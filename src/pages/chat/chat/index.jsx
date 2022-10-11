@@ -8,14 +8,13 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import React, { useMemo, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import styled from "styled-components";
+import { BackButton } from "../../../components/BackButton";
 import db from "../../../config/firebaseConfig";
 import { userInfo } from "../../../data/user";
+import * as S from "./chat.style";
 
-export const Chat = () => {
-  const { ch_id } = useParams();
+export const Chat = ({ ch_id }) => {
   const user = useRecoilValue(userInfo);
   const user_id = user["user_id"];
   const input = useRef(null);
@@ -61,21 +60,20 @@ export const Chat = () => {
     }
   };
 
-  useMemo(() => getChatDatas(), []);
+  useMemo(() => getChatDatas(), [ch_id]);
 
   return (
-    <div>
+    <S.ChatBox>
       {messages &&
         messages.map((data) =>
           data.from_id !== user_id ? (
             <div key={data.id}>
-              <Opponent>{data.from_id}</Opponent>
-              <Opponent>{data.content}</Opponent>
-              <Opponent>{data.sendAt.toDate().toString()}</Opponent>
+              <S.Opponent>{data.from_id}</S.Opponent>
+              <S.Opponent>{data.content}</S.Opponent>
+              <S.Opponent>{data.sendAt.toDate().toString()}</S.Opponent>
             </div>
           ) : (
             <div key={data.id}>
-              <span>{data.from_id}</span>
               <span>{data.content}</span>
               <span>{data.sendAt.toDate().toString()}</span>
             </div>
@@ -91,10 +89,6 @@ export const Chat = () => {
         />
         <button onClick={sendChat}>전송</button>
       </div>
-    </div>
+    </S.ChatBox>
   );
 };
-
-const Opponent = styled.span`
-  color: red;
-`;
