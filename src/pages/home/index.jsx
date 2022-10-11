@@ -1,10 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { userInfo } from "../../data/user";
 import axios from "axios";
 import { Postings } from "./Postings";
 import { useQuery } from "react-query";
+import { Layout } from "../../components/Layout";
 
 export const Home = () => {
   const user = useRecoilValue(userInfo);
@@ -13,17 +13,5 @@ export const Home = () => {
 
   const postQuery = useQuery(["posts"], getPosts);
 
-  return (
-    <HomeBox>
-      {postQuery.isSuccess && <Postings posts={postQuery.data} />}
-    </HomeBox>
-  );
+  return <>{postQuery.isSuccess && <Postings posts={postQuery.data} />}</>;
 };
-
-React.memo(Home);
-
-const HomeBox = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-`;
