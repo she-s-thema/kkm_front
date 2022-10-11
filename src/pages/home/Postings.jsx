@@ -5,37 +5,35 @@ import styled from "styled-components";
 
 export const Postings = ({ posts }) => {
   return (
-    <>
-      <Article>
-        <UserLocation />
-        <Cards>
-          {posts !== "" &&
-            posts.map((data) => {
-              const card = (
-                <Link
-                  key={data.post_id}
-                  to={`/post/${data.post_id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Card key={data.post_id}>
-                    <Image src={data.image_1} />
-                    <Title>{data.title}</Title>
-                    <Address>{data.address}</Address>
-                    <EndPoint>
-                      <span>{data.cost}원</span>
-                      <Heart>
-                        <HeartIcon src="../../assets/icons/heart.png" />
-                        <span>{data.heart}</span>
-                      </Heart>
-                    </EndPoint>
-                  </Card>
-                </Link>
-              );
-              return card;
-            })}
-        </Cards>
-      </Article>
-    </>
+    <Article>
+      <UserLocation />
+      <Cards>
+        {posts !== "" &&
+          posts.map((data) => {
+            const card = (
+              <Link
+                key={data.post_id}
+                to={`/post/${data.post_id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Card key={data.post_id}>
+                  <Image src={data.image_1} />
+                  <Title>{data.title}</Title>
+                  <Address>{data.address}</Address>
+                  <EndPoint>
+                    <span>{data.cost}원</span>
+                    <Heart>
+                      <HeartIcon src="../../assets/icons/heart.png" />
+                      <span>{data.heart}</span>
+                    </Heart>
+                  </EndPoint>
+                </Card>
+              </Link>
+            );
+            return card;
+          })}
+      </Cards>
+    </Article>
   );
 };
 

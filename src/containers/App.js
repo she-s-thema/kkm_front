@@ -12,6 +12,8 @@ import { Chat } from "../pages/chat/chat";
 import { Channels } from "../pages/chat/channels";
 import { Redirect } from "../pages/auth/redirect";
 import { MoreInfo } from "../pages/auth/moreInfo";
+import { Layout } from "../components/Layout";
+import { Chatting } from "../pages/chat";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -21,17 +23,18 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Header />
-          <Routes>
-            <Route exact path="/" element={<IsLogin />} />
-            <Route path="/chat" element={<Channels />} />
-            <Route path="/chat/:ch_id" element={<Chat />} />
-            <Route path="/posting" element={<Post />} />
-            <Route path="/mypage" element={<Mypage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/auth/kakao/*" element={<Redirect />} />
-            <Route path="/login/moreInfo" element={<MoreInfo />} />
-            <Route path="/post/:post_id" element={<PostDetail />} />
-          </Routes>
+          <Layout>
+            <Routes>
+              <Route exact path="/" element={<IsLogin />} />
+              <Route path="/chat" element={<Chatting />} />
+              <Route path="/posting" element={<Post />} />
+              <Route path="/mypage" element={<Mypage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/auth/kakao/*" element={<Redirect />} />
+              <Route path="/login/moreInfo" element={<MoreInfo />} />
+              <Route path="/post/:post_id" element={<PostDetail />} />
+            </Routes>
+          </Layout>
         </BrowserRouter>
       </QueryClientProvider>
     </RecoilRoot>
