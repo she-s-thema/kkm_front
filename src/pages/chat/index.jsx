@@ -13,6 +13,7 @@ export const Chatting = () => {
         changeChId={(ch) => {
           setClickedChId(ch);
         }}
+        clickedCh={clickedChId}
       />
       {clickedChId && <Chat ch_id={clickedChId} />}
     </Frame>
@@ -21,5 +22,6 @@ export const Chatting = () => {
 
 const Frame = styled.div`
   display: flex;
-  width: 100%;
+  width: 70%;
+  justify-content: space-between;
 `;
