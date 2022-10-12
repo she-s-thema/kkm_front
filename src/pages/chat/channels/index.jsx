@@ -1,12 +1,10 @@
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import React, { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import db from "../../../config/firebaseConfig";
 import * as S from "./channels.style";
 import { userInfo } from "../../../data/user";
 import moment from "moment";
-import { Layout } from "../../../components/Layout";
 
 export const Channels = (props) => {
   const [channels, setChannels] = useState([]);
@@ -63,7 +61,10 @@ export const Channels = (props) => {
         {channels &&
           channels.map((data) => (
             <div key={data.id}>
-              <S.ChatCard onClick={() => props.changeChId(data.id)}>
+              <S.ChatCard
+                isClicked={props.clickedCh === data.id}
+                onClick={() => props.changeChId(data.id)}
+              >
                 <S.ChatProfile
                   src={
                     data.loaner_id === user_id
@@ -81,9 +82,10 @@ export const Channels = (props) => {
                     <S.ChatContent>{data.lastText}</S.ChatContent>
                     <S.MidLine>·</S.MidLine>
                     <S.Time>
-                      {moment(data.sendAt.toDate().toString()).format(
-                        "hh시 mm분"
-                      )}
+                      {data.sendAt &&
+                        moment(data.sendAt.toDate().toString()).format(
+                          "hh시 mm분"
+                        )}
                     </S.Time>
                   </S.SubInfo>
                 </S.UserInfo>

@@ -20,7 +20,7 @@ export const ChatCard = styled.div`
   height: 40%;
   width: 100%;
   padding: 15px;
-  background-color: white;
+  background-color: ${({ isClicked }) => (isClicked ? "#f4f4f4" : "white")};
   border-radius: 10px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   margin-bottom: 12px;
