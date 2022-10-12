@@ -8,8 +8,8 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import React, { useMemo, useRef, useState } from "react";
+import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { BackButton } from "../../../components/BackButton";
 import db from "../../../config/firebaseConfig";
 import { userInfo } from "../../../data/user";
 import * as S from "./chat.style";
@@ -18,6 +18,7 @@ export const Chat = ({ ch_id }) => {
   const user = useRecoilValue(userInfo);
   const user_id = user["user_id"];
   const input = useRef(null);
+  const endRef = useRef(null);
   const [messages, setMessages] = useState([]);
   const [sendText, setSendText] = useState("");
 
@@ -59,26 +60,29 @@ export const Chat = ({ ch_id }) => {
       sendChat();
     }
   };
-
   useMemo(() => getChatDatas(), [ch_id]);
 
+  useEffect(() => {
+    endRef.current.scrollIntoView();
+  }, [messages]);
+
   return (
-    <S.ChatBox>
-      {messages &&
-        messages.map((data) =>
-          data.from_id !== user_id ? (
-            <div key={data.id}>
-              <S.Opponent>{data.from_id}</S.Opponent>
-              <S.Opponent>{data.content}</S.Opponent>
-              <S.Opponent>{data.sendAt.toDate().toString()}</S.Opponent>
-            </div>
-          ) : (
-            <div key={data.id}>
-              <span>{data.content}</span>
-              <span>{data.sendAt.toDate().toString()}</span>
-            </div>
-          )
-        )}
+    <S.Frame>
+      <S.ChatBox>
+        {messages &&
+          messages.map((data) =>
+            data.from_id !== user_id ? (
+              <S.ContentBox who={"opponent"} key={data.id}>
+                <S.Content who={"opponent"}>{data.content}</S.Content>
+              </S.ContentBox>
+            ) : (
+              <S.ContentBox key={data.id}>
+                <S.Content>{data.content}</S.Content>
+              </S.ContentBox>
+            )
+          )}
+        <div ref={endRef} />
+      </S.ChatBox>
       <div>
         <input
           ref={input}
@@ -89,6 +93,6 @@ export const Chat = ({ ch_id }) => {
         />
         <button onClick={sendChat}>전송</button>
       </div>
-    </S.ChatBox>
+    </S.Frame>
   );
 };
