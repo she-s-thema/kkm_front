@@ -37,22 +37,25 @@ export const Chat = ({ ch_id }) => {
   };
 
   const sendChat = async () => {
-    const newChatRef = doc(collection(db, "channels", ch_id, "chat"));
-    const channelRef = doc(db, "channels", newChatRef._path["segments"][1]);
-    const sendTime = new Date();
-    input.current.value = "";
+    if (sendText.trim() !== "") {
+      const newChatRef = doc(collection(db, "channels", ch_id, "chat"));
+      const channelRef = doc(db, "channels", newChatRef._path["segments"][1]);
+      const sendTime = new Date();
+      input.current.value = "";
 
-    await setDoc(newChatRef, {
-      content: sendText,
-      from_id: user_id,
-      sendAt: sendTime,
-      id: newChatRef.id,
-    });
+      await setDoc(newChatRef, {
+        content: sendText,
+        from_id: user_id,
+        sendAt: sendTime,
+        id: newChatRef.id,
+      });
 
-    await updateDoc(channelRef, {
-      sendAt: sendTime,
-      lastText: sendText,
-    });
+      await updateDoc(channelRef, {
+        sendAt: sendTime,
+        lastText: sendText,
+      });
+      setSendText("");
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -62,9 +65,7 @@ export const Chat = ({ ch_id }) => {
   };
   useMemo(() => getChatDatas(), [ch_id]);
 
-  useEffect(() => {
-    endRef.current.scrollIntoView();
-  }, [messages]);
+  useEffect(() => endRef.current.scrollIntoView(), [messages]);
 
   return (
     <S.Frame>
@@ -83,7 +84,7 @@ export const Chat = ({ ch_id }) => {
           )}
         <div ref={endRef} />
       </S.ChatBox>
-      <div>
+      <S.InputBox>
         <input
           ref={input}
           onKeyPress={handleKeyPress}
@@ -92,7 +93,7 @@ export const Chat = ({ ch_id }) => {
           onChange={(e) => setSendText(e.target.value)}
         />
         <button onClick={sendChat}>전송</button>
-      </div>
+      </S.InputBox>
     </S.Frame>
   );
 };
