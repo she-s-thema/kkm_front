@@ -10,10 +10,11 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { BackButton } from "../../components/BackButton";
 import db from "../../config/firebaseConfig";
+import { channelId } from "../../data/chat";
 import { userInfo } from "../../data/user";
 
 export const PostDetail = () => {
@@ -24,6 +25,7 @@ export const PostDetail = () => {
     { nickname: "", k_img_url: "../../assets/images/loading.png" },
   ]);
   const [heart, setHeart] = useState(0);
+  const [sChannelId, setSChannelId] = useRecoilState(channelId);
 
   const getDetailInfo = async () => {
     await axios.get(`/post/getDetail?post_id=${post_id}`).then((data) => {
@@ -56,14 +58,11 @@ export const PostDetail = () => {
       const querySnapshot = await getDocs(q);
       const querySnapshot2 = await getDocs(q2);
 
-      if (!querySnapshot.empty) {
-        querySnapshot.forEach(
-          (doc) => (window.location.href = `/chat/${doc.data().id}`)
-        );
-      } else if (!querySnapshot2.empty) {
-        querySnapshot2.forEach(
-          (doc) => (window.location.href = `/chat/${doc.data().id}`)
-        );
+      if (!querySnapshot.empty || !querySnapshot2.empty) {
+        querySnapshot.forEach((doc) => {
+          setSChannelId(doc.data().id);
+          window.location.href = `/chat`;
+        });
       } else {
         const newChRef = doc(collection(db, "channels"));
         const createdTime = new Date();
@@ -77,7 +76,8 @@ export const PostDetail = () => {
           owner_profile: postOwnerInfo[0].k_img_url,
           owner_name: postOwnerInfo[0].nickname,
         });
-        window.location.href = `/chat/${newChRef.id}`;
+        setSChannelId(newChRef.id);
+        window.location.href = `/chat`;
       }
     }
   };

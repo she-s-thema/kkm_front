@@ -1,16 +1,18 @@
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import React, { useEffect, useMemo, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import db from "../../../config/firebaseConfig";
 import * as S from "./channels.style";
 import { userInfo } from "../../../data/user";
 import moment from "moment";
+import { channelId } from "../../../data/chat";
 
 export const Channels = (props) => {
   const [channels, setChannels] = useState([]);
   const [loanerChat, setLoanerChat] = useState([]);
   const [ownerChat, setOwnerChat] = useState([]);
   const user = useRecoilValue(userInfo);
+  const [sChannelId, setSChannelId] = useRecoilState(channelId);
   const user_id = user["user_id"];
 
   const getChats = () => {
@@ -39,9 +41,7 @@ export const Channels = (props) => {
     });
   };
 
-  useMemo(() => {
-    getChats();
-  }, []);
+  useMemo(() => getChats(), []);
 
   useEffect(() => {
     const channels = [];
@@ -62,7 +62,7 @@ export const Channels = (props) => {
           channels.map((data) => (
             <div key={data.id}>
               <S.ChatCard
-                isClicked={props.clickedCh === data.id}
+                isClicked={sChannelId === data.id}
                 onClick={() => props.changeChId(data.id)}
               >
                 <S.ChatProfile

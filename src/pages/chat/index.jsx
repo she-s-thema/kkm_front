@@ -1,21 +1,17 @@
 import React from "react";
-import { useState } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { channelId } from "../../data/chat";
 import { Channels } from "./channels";
 import { Chat } from "./chat";
 
 export const Chatting = () => {
-  const [clickedChId, setClickedChId] = useState();
-
+  const [sChannelId, setSChannelId] = useRecoilState(channelId);
+  console.log(sChannelId);
   return (
     <Frame>
-      <Channels
-        changeChId={(ch) => {
-          setClickedChId(ch);
-        }}
-        clickedCh={clickedChId}
-      />
-      {clickedChId && <Chat ch_id={clickedChId} />}
+      <Channels changeChId={(ch) => setSChannelId(ch)} clickedCh={sChannelId} />
+      {sChannelId && <Chat ch_id={sChannelId} />}
     </Frame>
   );
 };
