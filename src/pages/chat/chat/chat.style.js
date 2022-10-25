@@ -28,12 +28,17 @@ export const Content = styled.span`
   align-items: center;
   justify-content: center;
   width: fit-content;
-  padding: 10px 19px;
+  padding: 10px 15px;
+  max-width: 50%;
 
   color: black;
   background-color: ${({ who }) => (who ? "white" : "#DFE6FF")};
 
   border: ${({ who }) => who && "0.2px solid #cccccc"};
   border-radius: ${({ who }) =>
-    who === "opponent" ? "100px 100px 100px 0px" : "100px 100px 0px 100px"};
+    who === "opponent" ? "15px 15px 15px 0px" : "15px 15px 0px 15px"};
+`;
+
+export const InputBox = styled.div`
+  width: 100%;
 `;
