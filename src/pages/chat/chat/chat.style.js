@@ -39,6 +39,41 @@ export const Content = styled.span`
     who === "opponent" ? "15px 15px 15px 0px" : "15px 15px 0px 15px"};
 `;
 
+export const ImgContent = styled.img`
+  width: 45%;
+  border-radius: 5px;
+`;
+
 export const InputBox = styled.div`
-  width: 100%;
+  display: flex;
+  width: 96%;
+  height: 5%;
+  padding: 2% 4%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+`;
+
+export const ChatInput = styled.input`
+  width: 82%;
+  border: none;
+  outline: none;
+`;
+
+export const ChatImgUpload = styled.label`
+  width: 4%;
+  display: flex;
+  border: none;
+  outline: none;
+`;
+
+export const SendBtn = styled.button`
+  display: flex;
+  justify-content: flex-end;
+  width: 10%;
+  border: none;
+  background-color: white;
+  color: #595fff;
 `;
