@@ -1,8 +1,6 @@
-import axios from "axios";
 import {
   collection,
   doc,
-  getDoc,
   getDocs,
   query,
   setDoc,
@@ -16,6 +14,7 @@ import { BackButton } from "../../components/BackButton";
 import db from "../../config/firebaseConfig";
 import { channelId } from "../../data/chat";
 import { userInfo } from "../../data/user";
+import { CustomAxios } from "../../utils/CustomAxios";
 
 export const PostDetail = () => {
   const user = useRecoilValue(userInfo);
@@ -28,15 +27,17 @@ export const PostDetail = () => {
   const [sChannelId, setSChannelId] = useRecoilState(channelId);
 
   const getDetailInfo = async () => {
-    await axios.get(`/post/getDetail?post_id=${post_id}`).then((data) => {
+    await CustomAxios.get(`/post/getDetail?post_id=${post_id}`).then((data) => {
       setDataInfo(data.data);
     });
 
-    await axios
-      .get(`/getUserProfile/${post_id}`)
-      .then((data) => setPostOwnerInfo(data.data));
+    await CustomAxios.get(`/getUserProfile/${post_id}`).then((data) =>
+      setPostOwnerInfo(data.data)
+    );
 
-    await axios.get(`/heart/${post_id}`).then((hea) => setHeart(hea.data));
+    await CustomAxios.get(`/heart/${post_id}`).then((hea) =>
+      setHeart(hea.data)
+    );
   };
 
   const newChannel = async () => {

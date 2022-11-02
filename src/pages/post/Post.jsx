@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userInfo } from "../../data/user";
 import styled from "styled-components";
 import { isImageFile } from "../../utils/isImage";
+import { CustomAxios } from "../../utils/CustomAxios";
 
 export const Post = () => {
   const fileInput = useRef(null);
@@ -88,7 +88,9 @@ export const Post = () => {
       newPost.append("description", desc);
       newPost.append("cost", cost);
       newPost.append("writetime", `${dateString} ${timeString}`);
-      await axios.post("/post", newPost).then((id) => (post_id = id.data));
+      await CustomAxios.post("/post", newPost).then(
+        (id) => (post_id = id.data)
+      );
 
       if (fileList.img1 !== "")
         imgList.append("multipartFile", fileList.img1[0]);
@@ -97,7 +99,7 @@ export const Post = () => {
       if (fileList.img3 !== "")
         imgList.append("multipartFile", fileList.img3[0]);
 
-      await axios({
+      await CustomAxios({
         method: "put",
         url: `/s3/file?post_id=${post_id}`,
         data: imgList,
