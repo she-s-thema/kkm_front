@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userInfo } from "../../data/user";
 import styled from "styled-components";
+import { isImageFile } from "../../utils/isImage";
 
 export const Post = () => {
   const fileInput = useRef(null);
@@ -41,9 +42,8 @@ export const Post = () => {
     setClickNum(clickNum + 1);
     setIsSelected(true);
     const file = e.target.files;
-    const fileType = file[0].type.substr(6, 15);
 
-    if (fileType === "png" || fileType === "jpg" || fileType === "jpeg") {
+    if (isImageFile(file)) {
       if (clickNum === 1) setFileList({ ...fileList, img1: file });
       else if (clickNum === 2) setFileList({ ...fileList, img2: file });
       else if (clickNum === 3) {
