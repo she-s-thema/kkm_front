@@ -7,7 +7,6 @@ import { Chat } from "./chat";
 
 export const Chatting = () => {
   const [sChannelId, setSChannelId] = useRecoilState(channelId);
-  console.log(sChannelId);
   return (
     <Frame>
       <Channels changeChId={(ch) => setSChannelId(ch)} clickedCh={sChannelId} />
