@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import queryString from "query-string";
-import axios from "axios";
 import { useRecoilState } from "recoil";
 import { kakaoUserInfo, userInfo } from "../../../data/user";
 import setAuthorizationToken from "../../../utils/setAuthorizationToken";
 import jwtDecode from "jwt-decode";
 import { getUserId } from "../../../utils/getUserId";
+import { CustomAxios } from "../../../utils/CustomAxios";
 
 export const Redirect = () => {
   const [user, setUser] = useRecoilState(kakaoUserInfo);
   const [ggmInfo, setGgmInfo] = useRecoilState(userInfo);
 
   const isSignUpUser = async (k_id) => {
-    await axios.post(`/user/kakaoLogin?k_id=${k_id}`).then((res) => {
+    await CustomAxios.post(`/user/kakaoLogin?k_id=${k_id}`).then((res) => {
       if (res.data === "guest") {
         window.location.href = "/login/moreInfo";
       } else {
@@ -33,7 +33,7 @@ export const Redirect = () => {
   };
 
   const getKakaoUserInfo = async (code) => {
-    await axios.get(`/user/getKakaoUserInfo?code=${code}`).then((res) => {
+    await CustomAxios.get(`/user/getKakaoUserInfo?code=${code}`).then((res) => {
       setUser({
         user_id: "0",
         nickname: "",

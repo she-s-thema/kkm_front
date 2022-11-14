@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -6,6 +5,7 @@ import styled from "styled-components";
 import { kakaoUserInfo, userInfo } from "../../../data/user";
 import setAuthorizationToken from "../../../utils/setAuthorizationToken";
 import jwtDecode from "jwt-decode";
+import { CustomAxios } from "../../../utils/CustomAxios";
 
 export const MoreInfo = () => {
   const newUser = new FormData();
@@ -24,7 +24,7 @@ export const MoreInfo = () => {
 
   const signUp = async () => {
     // 폼 데이터 서버로 전송
-    await axios.post(`/user/join`, newUser).then((res) => {
+    await CustomAxios.post(`/user/join`, newUser).then((res) => {
       setAuthorizationToken(res.data);
       setGgmInfo(jwtDecode(res.data));
       localStorage.setItem("token", res.data);
