@@ -37,7 +37,7 @@ export const ChatProfile = styled.img`
 
 export const ChatContent = styled.h6`
   color: black;
-  max-width: 70%;
+  max-width: 60%;
   font-weight: 400;
   font-size: 13px;
   white-space: nowrap;
@@ -66,7 +66,7 @@ export const SubInfo = styled.div`
 
 export const Time = styled.span`
   color: #808080;
-  font-size: 11px;
+  font-size: 50%;
 `;
 
 export const MidLine = styled.span`
