@@ -30,6 +30,7 @@ export const Content = styled.span`
   width: fit-content;
   padding: 10px 15px;
   max-width: 50%;
+  font-size: 80%;
 
   color: black;
   background-color: ${({ who }) => (who ? "white" : "#DFE6FF")};
@@ -57,7 +58,7 @@ export const InputBox = styled.div`
 `;
 
 export const ChatInput = styled.input`
-  width: 82%;
+  width: 74%;
   border: none;
   outline: none;
 `;
@@ -76,4 +77,11 @@ export const SendBtn = styled.button`
   border: none;
   background-color: white;
   color: #595fff;
+`;
+
+export const PromiseBox = styled.div`
+  width: 4%;
+  display: flex;
+  border: none;
+  outline: none;
 `;
