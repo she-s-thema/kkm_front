@@ -76,6 +76,9 @@ export const PostDetail = () => {
           owner_id: postOwnerInfo[0].user_id,
           owner_profile: postOwnerInfo[0].k_img_url,
           owner_name: postOwnerInfo[0].nickname,
+          post_id: dataInfo["post_id"],
+          post_cost: dataInfo["cost"],
+          thumbnail: dataInfo["image_1"],
         });
         setSChannelId(newChRef.id);
         window.location.href = `/chat`;
