@@ -16,11 +16,11 @@ import { CustomAxios } from "../../../utils/CustomAxios";
 import { isImageFile } from "../../../utils/isImage";
 import * as S from "./chat.style";
 import { FaImages, FaRegCalendarAlt } from "react-icons/fa";
-import { PromisePopUp } from "../../../components/PromisePopUp";
+import { PromisePopUp } from "../../../components/promise";
+import { getPromises } from "../../../utils/promise";
 
 export const Chat = ({ ch_id }) => {
-  const user = useRecoilValue(userInfo);
-  const user_id = user["user_id"];
+  const user_id = useRecoilValue(userInfo)["user_id"];
   const input = useRef(null);
   const endRef = useRef(null);
   const imgRef = useRef(null);
@@ -28,18 +28,6 @@ export const Chat = ({ ch_id }) => {
   const [sendText, setSendText] = useState("");
   const [promise, setPromise] = useState();
   const [promiseClick, setPromiseClick] = useState(false);
-
-  const getPromises = () => {
-    const q = query(
-      collection(db, "channels", ch_id, "promise"),
-      orderBy("madeAt")
-    );
-    onSnapshot(q, (qsn) => {
-      qsn.forEach((doc) => {
-        if (doc.data().state === 1) setPromise(doc.data());
-      });
-    });
-  };
 
   const getChatDatas = () => {
     const q = query(
@@ -113,13 +101,17 @@ export const Chat = ({ ch_id }) => {
     }
   };
 
+  const completePromise = () => {};
+
   useMemo(() => {
-    getChatDatas();
+    setPromiseClick(false);
     setPromise(null);
+    getChatDatas();
   }, [ch_id]);
 
   useEffect(() => {
-    getPromises();
+    // setPromise(getPromises(ch_id));
+    getPromises(ch_id).then((data) => setPromise(data));
     setPromiseClick(false);
     endRef.current.scrollIntoView();
   }, [messages]);
@@ -127,7 +119,9 @@ export const Chat = ({ ch_id }) => {
   return (
     <S.Frame>
       <S.ChatBox>
-        {promiseClick && <PromisePopUp promise={promise} />}
+        {promiseClick && (
+          <PromisePopUp promise={promise} completePromise={completePromise} />
+        )}
         {messages
           ? messages.map((data) =>
               data.from_id !== user_id ? (
