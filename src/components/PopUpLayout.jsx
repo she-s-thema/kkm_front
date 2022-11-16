@@ -23,7 +23,6 @@ export const PopUpLayout = ({ children }) => {
           display: "flex",
           flexDirection: "column",
           rowGap: "10px",
-          colomnGap: "5px",
           backgroundColor: "white",
           borderRadius: "15px",
           padding: "2% 3%",
