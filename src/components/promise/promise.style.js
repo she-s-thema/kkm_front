@@ -2,7 +2,7 @@ import styled from "styled-components";
 export const PopUpLayout = styled.div`
   display: flex;
   position: absolute;
-  width: 18%;
+  width: 20%;
 
   flex-direction: column;
   row-gap: 10px;
@@ -31,6 +31,9 @@ export const PromiseData = styled.span`
 `;
 
 export const DataBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 3%;
   border-radius: 5px;
   background-color: #ebf0ff;
