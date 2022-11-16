@@ -18,6 +18,7 @@ import * as S from "./chat.style";
 import { FaImages, FaRegCalendarAlt } from "react-icons/fa";
 import { PromisePopUp } from "../../../components/promise";
 import { getPromises } from "../../../utils/promise";
+import { sendChat } from "../../../utils/chat";
 
 export const Chat = ({ ch_id }) => {
   const user_id = useRecoilValue(userInfo)["user_id"];
@@ -43,24 +44,10 @@ export const Chat = ({ ch_id }) => {
     });
   };
 
-  const sendChat = async () => {
+  const sendChatHandle = async () => {
     if (sendText.trim() !== "") {
-      const newChatRef = doc(collection(db, "channels", ch_id, "chat"));
-      const channelRef = doc(db, "channels", newChatRef._path["segments"][1]);
-      const sendTime = new Date();
       input.current.value = "";
-
-      await setDoc(newChatRef, {
-        content: sendText,
-        from_id: user_id,
-        sendAt: sendTime,
-        id: newChatRef.id,
-      });
-
-      await updateDoc(channelRef, {
-        sendAt: sendTime,
-        lastText: sendText,
-      });
+      sendChat(ch_id, user_id, sendText);
       setSendText("");
     }
   };
@@ -100,9 +87,6 @@ export const Chat = ({ ch_id }) => {
       e.target.value = "";
     }
   };
-
-  const completePromise = () => {};
-
   useMemo(() => {
     setPromiseClick(false);
     setPromise(null);
@@ -110,8 +94,9 @@ export const Chat = ({ ch_id }) => {
   }, [ch_id]);
 
   useEffect(() => {
-    // setPromise(getPromises(ch_id));
-    getPromises(ch_id).then((data) => setPromise(data));
+    getPromises(ch_id).then((data) => {
+      setPromise(data);
+    });
     setPromiseClick(false);
     endRef.current.scrollIntoView();
   }, [messages]);
@@ -120,7 +105,10 @@ export const Chat = ({ ch_id }) => {
     <S.Frame>
       <S.ChatBox>
         {promiseClick && (
-          <PromisePopUp promise={promise} completePromise={completePromise} />
+          <PromisePopUp
+            promise={promise}
+            handlePopUp={() => setPromiseClick((prev) => !prev)}
+          />
         )}
         {messages
           ? messages.map((data) =>
@@ -161,12 +149,12 @@ export const Chat = ({ ch_id }) => {
         </S.PromiseBox>
         <S.ChatInput
           ref={input}
-          onKeyPress={(e) => (e.key === "Enter" ? sendChat() : null)}
+          onKeyPress={(e) => (e.key === "Enter" ? sendChatHandle() : null)}
           type="text"
           placeholder="채팅 입력"
           onChange={(e) => setSendText(e.target.value)}
         />
-        <S.SendBtn onClick={sendChat}>전송</S.SendBtn>
+        <S.SendBtn onClick={sendChatHandle}>전송</S.SendBtn>
       </S.InputBox>
     </S.Frame>
   );
