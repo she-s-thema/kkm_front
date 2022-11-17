@@ -5,7 +5,7 @@ export const CompletedStage = ({ clickHandle, stage }) => {
   return (
     <>
       <S.Title>
-        {stage % 6 === 0
+        {stage % 6 === 0 || stage === 7
           ? "상대방과 약속이 없어요!"
           : "옷 반납을 위해 두 번째 약속을 잡아보세요!"}
       </S.Title>
