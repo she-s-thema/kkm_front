@@ -42,12 +42,13 @@ export const DataBox = styled.div`
 export const PromiseBtn = styled.button`
   width: ${(props) => props.width};
   color: white;
-  background-color: #595fff;
+  background-color: ${(props) =>
+    props.backColor ? props.backColor : "#595fff"};
   border: none;
   border-radius: 10px;
   padding: 5% 0;
   &:hover {
-    background-color: #4448c2;
+    background-color: ${(props) => (props.backColor ? "#5b5b5b" : "#4448c2")};
     color: #c2c2c2;
   }
 `;
@@ -65,4 +66,25 @@ export const Head = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const KkomakBox = styled.div`
+  display: flex;
+  row-gap: 14px;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+`;
+
+export const Kkomak = styled.img`
+  width: 20%;
+  margin-bottom: 20px;
+`;
+
+export const Quest = styled.span`
+  display: block;
+  font-size: larger;
+  font-weight: bold;
+  text-align: center;
 `;
