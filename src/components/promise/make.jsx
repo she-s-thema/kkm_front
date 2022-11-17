@@ -48,20 +48,22 @@ export const MakePromise = ({ handlePopUp, promise, promisePopUp }) => {
             setMeetDateTime(new Date(e.target.value));
           }}
         />
-        <S.SubDesc>에 만나서</S.SubDesc>
+        <S.SubDesc>에 만나서 {promise.stage === 3 && "반납할게요."}</S.SubDesc>
       </S.DataBox>
-      <S.DataBox>
-        <S.Input
-          type="date"
-          onChange={(e) => setStartDate(new Date(e.target.value))}
-        />
-        <S.SubDesc>부터</S.SubDesc>
-        <S.Input
-          type="date"
-          onChange={(e) => setEndDate(new Date(e.target.value))}
-        />
-        <S.SubDesc>까지 빌릴게요.</S.SubDesc>
-      </S.DataBox>
+      {promise.stage !== 3 && (
+        <S.DataBox>
+          <S.Input
+            type="date"
+            onChange={(e) => setStartDate(new Date(e.target.value))}
+          />
+          <S.SubDesc>부터</S.SubDesc>
+          <S.Input
+            type="date"
+            onChange={(e) => setEndDate(new Date(e.target.value))}
+          />
+          <S.SubDesc>까지 빌릴게요.</S.SubDesc>
+        </S.DataBox>
+      )}
       <S.PromiseBtn onClick={handleMakePromise}>약속 제안하기</S.PromiseBtn>
     </PopUpLayout>
   );
