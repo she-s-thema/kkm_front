@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import db from "../../../config/firebaseConfig";
 import { userInfo } from "../../../data/user";
-import { CustomAxios } from "../../../utils/CustomAxios";
+import { CustomAxios } from "../../../utils/customAxios";
 import { isImageFile } from "../../../utils/isImage";
 import * as S from "./chat.style";
 import { FaImages, FaRegCalendarAlt } from "react-icons/fa";
@@ -97,7 +97,6 @@ export const Chat = ({ ch_id }) => {
     getPromises(ch_id).then((data) => {
       setPromise(data);
     });
-    setPromiseClick(false);
     endRef.current.scrollIntoView();
   }, [messages]);
 

@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { userInfo } from "../../data/user";
 import styled from "styled-components";
 import { isImageFile } from "../../utils/isImage";
-import { CustomAxios } from "../../utils/CustomAxios";
+import { CustomAxios } from "../../utils/customAxios";
 
 export const Post = () => {
   const fileInput = useRef(null);

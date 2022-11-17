@@ -13,7 +13,7 @@ import { BackButton } from "../../../components/BackButton";
 import db from "../../../config/firebaseConfig";
 import { channelId } from "../../../data/chat";
 import { userInfo } from "../../../data/user";
-import { CustomAxios } from "../../../utils/CustomAxios";
+import { CustomAxios } from "../../../utils/customAxios";
 import * as S from "./detail.style";
 
 export const PostDetail = () => {

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { kakaoUserInfo, userInfo } from "../../../data/user";
 import setAuthorizationToken from "../../../utils/setAuthorizationToken";
 import jwtDecode from "jwt-decode";
-import { CustomAxios } from "../../../utils/CustomAxios";
+import { CustomAxios } from "../../../utils/customAxios";
 
 export const MoreInfo = () => {
   const newUser = new FormData();

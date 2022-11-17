@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { userInfo } from "../../data/user";
 import { Postings } from "./postings";
 import { useQuery } from "react-query";
-import { CustomAxios } from "../../utils/CustomAxios";
+import { CustomAxios } from "../../utils/customAxios";
 
 export const Home = () => {
   const user = useRecoilValue(userInfo);

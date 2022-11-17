@@ -5,7 +5,7 @@ import { kakaoUserInfo, userInfo } from "../../../data/user";
 import setAuthorizationToken from "../../../utils/setAuthorizationToken";
 import jwtDecode from "jwt-decode";
 import { getUserId } from "../../../utils/getUserId";
-import { CustomAxios } from "../../../utils/CustomAxios";
+import { CustomAxios } from "../../../utils/customAxios";
 
 export const Redirect = () => {
   const [user, setUser] = useRecoilState(kakaoUserInfo);
