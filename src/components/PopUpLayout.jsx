@@ -1,6 +1,6 @@
 import React from "react";
 
-export const PopUpLayout = ({ children }) => {
+export const PopUpLayout = ({ children, height }) => {
   return (
     <div
       style={{
@@ -19,6 +19,7 @@ export const PopUpLayout = ({ children }) => {
       <div
         style={{
           width: "30%",
+          height: height ? height : null,
           position: "fixed",
           display: "flex",
           flexDirection: "column",
@@ -26,6 +27,8 @@ export const PopUpLayout = ({ children }) => {
           backgroundColor: "white",
           borderRadius: "15px",
           padding: "2% 3%",
+          justifyContent: "center",
+          transition: "0.2s ease",
         }}
       >
         {children}
