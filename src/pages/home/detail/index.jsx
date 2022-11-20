@@ -14,16 +14,20 @@ import db from "../../../config/firebaseConfig";
 import { channelId } from "../../../data/chat";
 import { userInfo } from "../../../data/user";
 import { CustomAxios } from "../../../utils/customAxios";
+import {
+  cancelHeart,
+  getJjamList,
+  isMyJjam,
+  raiseHeart,
+} from "../../../utils/heart";
 import * as S from "./detail.style";
 
 export const PostDetail = () => {
   const user = useRecoilValue(userInfo);
   const { post_id } = useParams();
   const [dataInfo, setDataInfo] = useState();
-  const [postOwnerInfo, setPostOwnerInfo] = useState([
-    { nickname: "", k_img_url: "../../assets/images/loading.png" },
-  ]);
-  const [heart, setHeart] = useState(0);
+  const [postOwnerInfo, setPostOwnerInfo] = useState();
+  const [isHeart, setIsHeart] = useState(false);
   const [sChannelId, setSChannelId] = useRecoilState(channelId);
 
   const getDetailInfo = async () => {
@@ -35,8 +39,8 @@ export const PostDetail = () => {
       setPostOwnerInfo(data.data)
     );
 
-    await CustomAxios.get(`/heart/${post_id}`).then((hea) =>
-      setHeart(hea.data)
+    isMyJjam(post_id, user["user_id"]).then((data) =>
+      data ? setIsHeart(true) : null
     );
   };
 
@@ -86,6 +90,12 @@ export const PostDetail = () => {
     }
   };
 
+  const handleHeart = () => {
+    if (isHeart) {
+      cancelHeart(post_id, user["user_id"]);
+    } else raiseHeart(post_id, postOwnerInfo[0].user_id, user["user_id"]);
+  };
+
   useEffect(() => {
     getDetailInfo();
   }, []);
@@ -95,8 +105,22 @@ export const PostDetail = () => {
         <S.ArticleBox>
           <S.UserBox>
             <BackButton />
-            <S.KProfileImg src={postOwnerInfo[0].k_img_url} />
-            <S.Nickname>{postOwnerInfo[0].nickname}</S.Nickname>
+            {postOwnerInfo && (
+              <>
+                <S.KProfileImg src={postOwnerInfo[0].k_img_url} />
+                <S.Container>
+                  <S.Nickname>{postOwnerInfo[0].nickname}</S.Nickname>
+                  <S.Heart onClick={handleHeart}>
+                    <S.HeartNum>{dataInfo["heart"]}</S.HeartNum>
+                    <S.HeartIcon
+                      src={`../../assets/icons/heart${
+                        isHeart ? "" : "-empty"
+                      }.png`}
+                    />
+                  </S.Heart>
+                </S.Container>
+              </>
+            )}
           </S.UserBox>
           <S.Article>
             <S.ImageBox>
@@ -109,10 +133,6 @@ export const PostDetail = () => {
             <S.Info>
               <S.InfoHead>
                 <S.Title>{dataInfo["title"]}</S.Title>
-                <S.Heart>
-                  <S.HeartIcon src="../../assets/icons/heart.png" />
-                  <span>{heart}</span>
-                </S.Heart>
               </S.InfoHead>
               <S.SubTitle>대여 가격</S.SubTitle>
               <S.Cost>
