@@ -45,7 +45,7 @@ export const makePromise = async (
         p_id: 2,
         place: place,
         time: time,
-        stage: 4,
+        stage: stage,
         madeAt: new Date(),
         from_id: user_id,
       });
