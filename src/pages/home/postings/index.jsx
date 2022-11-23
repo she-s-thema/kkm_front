@@ -7,7 +7,7 @@ export const Postings = ({ posts }) => {
     <S.Article>
       <UserLocation />
       <S.Cards>
-        {posts !== "" &&
+        {posts &&
           posts.map((data) => {
             const card = (
               <Link

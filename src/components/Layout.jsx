@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export const Layout = ({ children, match, location, history }) => {
+export const Layout = ({ children }) => {
   return <LayoutStyle>{children}</LayoutStyle>;
 };
 
