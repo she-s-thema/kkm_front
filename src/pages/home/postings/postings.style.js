@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Article = styled.article`
   width: 50%;
   height: 100%;
-  padding: 0 10% 10% 10%;
+  padding: 0 10% 30% 10%;
   background-color: white;
 `;
 
@@ -12,7 +12,8 @@ export const Cards = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: 32% 32% 32%;
-  grid-gap: 2%;
+  column-gap: 2%;
+  row-gap: 20px;
 `;
 
 export const Card = styled.div`
