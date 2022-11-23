@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Frame = styled.div`
   display: flex;
   width: 100%;
-  height: 45vw;
+  height: 100%;
   justify-content: center;
   align-items: center;
 `;
@@ -11,31 +11,34 @@ export const Frame = styled.div`
 export const ArticleBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 46%;
   height: 100%;
-  background-color: #f6f6f6;
+  padding: 10px 2%;
+  row-gap: 15px;
+  background-color: #ffffff;
 `;
 
 export const UserBox = styled.div`
   display: flex;
   width: 100%;
-  height: 60px;
   align-items: center;
   background-color: white;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  width: 86%;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const Article = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  aspect-ratio: 1.5 / 1;
+  row-gap: 15px;
+  flex-direction: column;
   justify-content: space-between;
-`;
-
-export const ImageBox = styled.div`
-  position: relative;
-  width: 60%;
-  height: 100%;
 `;
 
 export const Info = styled.div`
@@ -48,17 +51,21 @@ export const Info = styled.div`
   justify-content: space-around;
 `;
 
-export const Image = styled.img`
+export const ImageBox = styled.div`
   width: 100%;
+`;
+
+export const Image = styled.img`
+  display: block;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  border-radius: 10px;
   object-fit: contain;
   background-color: black;
-  position: absolute;
-  width: 100%;
-  height: 100%;
 `;
 
 export const KProfileImg = styled.img`
-  width: 4%;
+  width: 6%;
   height: auto;
   object-fit: cover;
   aspect-ratio: 1 / 1;
@@ -69,66 +76,80 @@ export const Nickname = styled.span`
   margin-left: 10px;
 `;
 
-export const Title = styled.span`
-  line-height: 100%;
-  font-weight: 500;
-  font-size: 24px;
-`;
-
-export const SubTitle = styled.span`
-  font-weight: 700;
-  font-size: 15px;
-`;
-
-export const Cost = styled.div`
-  display: flex;
-  background-color: white;
-  width: 60%;
-  padding: 3% 3%;
-  border-radius: 7px;
-  justify-content: space-between;
-`;
-
-export const Desc = styled.div`
-  background-color: white;
-  width: 89%;
-  height: 40%;
-  padding: 3% 3%;
-  border-radius: 7px;
-`;
-
-export const ButtonBox = styled.div`
-  width: 100%;
-  height: 8%;
-  display: flex;
-  align-items: flex-end;
-`;
-
-export const ChatBtn = styled.button`
-  height: 100%;
-  width: 95%;
-  border: none;
-  color: white;
-  background: #595fff;
-  border-radius: 35px;
-  cursor: pointer;
-`;
-
 export const Heart = styled.div`
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   color: #646fd4;
 `;
 
 export const HeartIcon = styled.img`
-  width: 20px;
-  margin-top: 1px;
-  margin-right: 4px;
+  width: 17%;
+  margin-left: 0.8rem;
 `;
 
-export const InfoHead = styled.section`
+export const HeartNum = styled.span`
+  font-weight: bolder;
+`;
+
+export const Head = styled.div`
   display: flex;
-  width: 95%;
-  align-items: center;
+  width: 100%;
+  height: 100%;
   justify-content: space-between;
+  align-items: center;
+`;
+
+export const LeftInfoBox = styled.div`
+  display: flex;
+  row-gap: 6px;
+  flex-direction: column;
+  width: 70%;
+`;
+
+export const SubInfo = styled.div`
+  display: flex;
+  align-items: center;
+  color: #828282;
+  font-size: 80%;
+`;
+
+export const Cost = styled.span`
+  line-height: 90%;
+  font-size: 250%;
+  font-weight: 500;
+`;
+
+export const Title = styled.span`
+  font-weight: 500;
+`;
+
+export const Line = styled.div`
+  width: 100%;
+  height: 0.5px;
+  background-color: #b6b6b6;
+`;
+
+export const DescBox = styled.div`
+  padding: 1% 2%;
+  color: #343434;
+`;
+
+export const ChatBtn = styled.button`
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  background-color: #595fff;
+  color: white;
+  font-size: 120%;
+  font-weight: 500;
+  &:hover {
+    background-color: #383ecb;
+    color: #ededed;
+  }
+`;
+
+export const Dot = styled.span`
+  margin: 0 5px;
 `;
