@@ -32,12 +32,13 @@ export const PromisePopUp = ({ promise, handlePopUp }) => {
         <GiveKkomak
           updatePromise={updatePromise}
           handlePopUp={() => setIsClicked(0)}
+          promisePopUp={handlePopUp}
           promise={promise}
         />
       ) : null}
 
       <S.PopUpLayout>
-        {promise.stage % 3 === 0 || promise.stage === 7 ? (
+        {promise.stage === 0 || promise.stage === 3 || promise.stage === 7 ? (
           <CompletedStage
             clickHandle={() => setIsClicked(1)}
             stage={promise.stage}

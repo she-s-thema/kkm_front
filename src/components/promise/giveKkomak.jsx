@@ -7,7 +7,12 @@ import { CustomAxios } from "../../utils/customAxios";
 import { PopUpLayout } from "../PopUpLayout";
 import * as S from "./promise.style";
 
-export const GiveKkomak = ({ updatePromise, promise, handlePopUp }) => {
+export const GiveKkomak = ({
+  updatePromise,
+  promise,
+  handlePopUp,
+  promisePopUp,
+}) => {
   const first = useRef(null);
   const second = useRef(null);
   const user_id = useRecoilValue(userInfo)["user_id"];
@@ -21,6 +26,8 @@ export const GiveKkomak = ({ updatePromise, promise, handlePopUp }) => {
     }, 1000);
     setTimeout(() => {
       updatePromise();
+      handlePopUp();
+      promisePopUp();
     }, 4000);
   };
 
