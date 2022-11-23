@@ -6,6 +6,7 @@ import * as S from "./channels.style";
 import { userInfo } from "../../../data/user";
 import moment from "moment";
 import { channelId } from "../../../data/chat";
+import { timeDifference } from "../../../utils/timeDifference";
 
 export const Channels = (props) => {
   const [channels, setChannels] = useState([]);
@@ -52,6 +53,10 @@ export const Channels = (props) => {
       return a.sendAt > b.sendAt ? -1 : a.sendAt < b.sendAt ? 1 : 0;
     });
 
+    channels.forEach((data) => {
+      data.sendAt = timeDifference(data.sendAt.toDate());
+    });
+
     setChannels(channels);
   }, [ownerChat, loanerChat]);
 
@@ -81,12 +86,7 @@ export const Channels = (props) => {
                   <S.SubInfo>
                     <S.ChatContent>{data.lastText}</S.ChatContent>
                     <S.MidLine>·</S.MidLine>
-                    <S.Time>
-                      {data.sendAt &&
-                        moment(data.sendAt.toDate().toString()).format(
-                          "hh시 mm분"
-                        )}
-                    </S.Time>
+                    <S.Time>{data.sendAt}</S.Time>
                   </S.SubInfo>
                 </S.UserInfo>
               </S.ChatCard>

@@ -6,7 +6,6 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
-import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import { MdLocationOn } from "react-icons/md";
 import { useParams } from "react-router-dom";
@@ -17,6 +16,7 @@ import { channelId } from "../../../data/chat";
 import { userInfo } from "../../../data/user";
 import { CustomAxios } from "../../../utils/customAxios";
 import { cancelHeart, isMyJjam, raiseHeart } from "../../../utils/heart";
+import { timeDifference } from "../../../utils/timeDifference";
 import * as S from "./detail.style";
 
 export const PostDetail = () => {
@@ -29,7 +29,8 @@ export const PostDetail = () => {
 
   const getDetailInfo = async () => {
     await CustomAxios.get(`/post/getDetail?post_id=${post_id}`).then((data) => {
-      setDataInfo(() => data.data);
+      const time = timeDifference(data.data["write_time"]);
+      setDataInfo({ ...data.data, write_time: time });
     });
 
     await CustomAxios.get(`/getUserProfile/${post_id}`).then((data) =>
@@ -91,8 +92,10 @@ export const PostDetail = () => {
     if (isHeart) {
       cancelHeart(post_id, user["user_id"]);
     } else raiseHeart(post_id, postOwnerInfo[0].user_id, user["user_id"]);
-    setIsHeart((h) => !h);
-    getDetailInfo();
+    setTimeout(() => {
+      setIsHeart((h) => !h);
+      getDetailInfo();
+    }, 500);
   };
 
   useEffect(() => {
@@ -131,12 +134,15 @@ export const PostDetail = () => {
                 <S.SubInfo>
                   <MdLocationOn />
                   {postOwnerInfo[0].address}
-                  {moment(dataInfo["write_time"]).format("MM월 DD일 hh시 mm분")}
+                  <S.Dot>∙</S.Dot>
+                  {dataInfo["write_time"]}
                 </S.SubInfo>
                 <S.Title>{dataInfo["title"]}</S.Title>
               </S.LeftInfoBox>
               <S.Cost>{dataInfo["cost"]}원</S.Cost>
             </S.Head>
+            <S.ChatBtn onClick={newChannel}>대화하기</S.ChatBtn>
+
             <S.Line />
             <S.DescBox>{dataInfo["description"]}</S.DescBox>
             <S.Line />
