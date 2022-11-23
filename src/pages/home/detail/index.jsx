@@ -6,7 +6,9 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
+import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
+import { MdLocationOn } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { BackButton } from "../../../components/BackButton";
@@ -14,12 +16,7 @@ import db from "../../../config/firebaseConfig";
 import { channelId } from "../../../data/chat";
 import { userInfo } from "../../../data/user";
 import { CustomAxios } from "../../../utils/customAxios";
-import {
-  cancelHeart,
-  getJjamList,
-  isMyJjam,
-  raiseHeart,
-} from "../../../utils/heart";
+import { cancelHeart, isMyJjam, raiseHeart } from "../../../utils/heart";
 import * as S from "./detail.style";
 
 export const PostDetail = () => {
@@ -32,11 +29,11 @@ export const PostDetail = () => {
 
   const getDetailInfo = async () => {
     await CustomAxios.get(`/post/getDetail?post_id=${post_id}`).then((data) => {
-      setDataInfo(data.data);
+      setDataInfo(() => data.data);
     });
 
     await CustomAxios.get(`/getUserProfile/${post_id}`).then((data) =>
-      setPostOwnerInfo(data.data)
+      setPostOwnerInfo(() => data.data)
     );
 
     isMyJjam(post_id, user["user_id"]).then((data) =>
@@ -94,33 +91,32 @@ export const PostDetail = () => {
     if (isHeart) {
       cancelHeart(post_id, user["user_id"]);
     } else raiseHeart(post_id, postOwnerInfo[0].user_id, user["user_id"]);
+    setIsHeart((h) => !h);
+    getDetailInfo();
   };
 
   useEffect(() => {
     getDetailInfo();
-  }, []);
+  }, [isHeart]);
+
   return (
     <S.Frame>
-      {dataInfo && (
+      {dataInfo && postOwnerInfo && (
         <S.ArticleBox>
           <S.UserBox>
             <BackButton />
-            {postOwnerInfo && (
-              <>
-                <S.KProfileImg src={postOwnerInfo[0].k_img_url} />
-                <S.Container>
-                  <S.Nickname>{postOwnerInfo[0].nickname}</S.Nickname>
-                  <S.Heart onClick={handleHeart}>
-                    <S.HeartNum>{dataInfo["heart"]}</S.HeartNum>
-                    <S.HeartIcon
-                      src={`../../assets/icons/heart${
-                        isHeart ? "" : "-empty"
-                      }.png`}
-                    />
-                  </S.Heart>
-                </S.Container>
-              </>
-            )}
+            <S.KProfileImg src={postOwnerInfo[0].k_img_url} />
+            <S.Container>
+              <S.Nickname>{postOwnerInfo[0].nickname}</S.Nickname>
+              <S.Heart onClick={handleHeart}>
+                <S.HeartNum>{dataInfo["heart"]}</S.HeartNum>
+                {isHeart ? (
+                  <S.HeartIcon src={`../../assets/icons/heart.png`} />
+                ) : (
+                  <S.HeartIcon src={`../../assets/icons/heart-empty.png`} />
+                )}
+              </S.Heart>
+            </S.Container>
           </S.UserBox>
           <S.Article>
             <S.ImageBox>
@@ -130,26 +126,28 @@ export const PostDetail = () => {
               {/* {dataInfo["image_2"] !== "" && <Image src={dataInfo["image_2"]} />} */}
               {/* {dataInfo["image_3"] !== "" && <Image src={dataInfo["image_3"]} />} */}
             </S.ImageBox>
-            <S.Info>
-              <S.InfoHead>
+            <S.Head>
+              <S.LeftInfoBox>
+                <S.SubInfo>
+                  <MdLocationOn />
+                  {postOwnerInfo[0].address}
+                  {moment(dataInfo["write_time"]).format("MM월 DD일 hh시 mm분")}
+                </S.SubInfo>
                 <S.Title>{dataInfo["title"]}</S.Title>
-              </S.InfoHead>
-              <S.SubTitle>대여 가격</S.SubTitle>
-              <S.Cost>
-                <span>{dataInfo["cost"]}</span>
-                <span>₩</span>
-              </S.Cost>
-              <S.SubTitle>상품 설명</S.SubTitle>
-              <S.Desc>
-                <span>{dataInfo["description"]}</span>
-              </S.Desc>
-              <S.ButtonBox>
-                <S.ChatBtn onClick={newChannel}>대화하기</S.ChatBtn>
-              </S.ButtonBox>
-            </S.Info>
+              </S.LeftInfoBox>
+              <S.Cost>{dataInfo["cost"]}원</S.Cost>
+            </S.Head>
+            <S.Line />
+            <S.DescBox>{dataInfo["description"]}</S.DescBox>
+            <S.Line />
+            <S.Title>추천 게시물</S.Title>
           </S.Article>
         </S.ArticleBox>
       )}
     </S.Frame>
   );
 };
+
+{
+  /* <S.ChatBtn onClick={newChannel}>대화하기</S.ChatBtn> */
+}
