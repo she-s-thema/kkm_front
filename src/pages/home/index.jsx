@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userInfo } from "../../data/user";
 import { Postings } from "./postings";
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { CustomAxios } from "../../utils/customAxios";
 import { useInView } from "react-intersection-observer";
-import { Loader } from "../../components/Loader";
 
 export const Home = () => {
   const user = useRecoilValue(userInfo);
