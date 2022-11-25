@@ -18,6 +18,12 @@ body {
   color: #4378ff;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 @keyframes slide-in {
   from {
     transform: translateX(100%);
