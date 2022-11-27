@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userInfo } from "../../data/user";
-import styled from "styled-components";
 import { isImageFile } from "../../utils/isImage";
 import { CustomAxios } from "../../utils/customAxios";
 import axios from "axios";
@@ -30,14 +29,6 @@ export const Post = () => {
   newPost.append("image_3", "");
   newPost.append("state", 0);
   newPost.append("type", 0);
-
-  const isNum = (e) => {
-    if (!isNaN(e.target.value)) setCost(e.target.value);
-    else {
-      alert("숫자를 입력해주세요.");
-      e.target.value = "";
-    }
-  };
 
   // file이 선택될 때 마다 실행되는 함수
   const handleChange = (e) => {
@@ -86,8 +77,14 @@ export const Post = () => {
       let minutes = ("0" + today.getMinutes()).slice(-2);
       let seconds = ("0" + today.getSeconds()).slice(-2);
       let timeString = hours + ":" + minutes + ":" + seconds;
+
+      let fiDesc = desc;
+      if (fiDesc.includes("\n")) {
+        fiDesc = fiDesc.replace(/\n/gi, "<br />");
+      }
+
       newPost.append("title", title);
-      newPost.append("description", desc);
+      newPost.append("description", fiDesc);
       newPost.append("cost", cost);
       newPost.append("writetime", `${dateString} ${timeString}`);
       await CustomAxios.post("/post", newPost).then(
@@ -141,9 +138,9 @@ export const Post = () => {
       />
       <S.CostBox>
         <S.CostInput
-          onChange={isNum}
           type="number"
           placeholder="가격을 설정해주세요."
+          onChange={(e) => setCost(e.target.value)}
         />
         <S.WonIcon>₩</S.WonIcon>
       </S.CostBox>
