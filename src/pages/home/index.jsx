@@ -5,6 +5,7 @@ import { Postings } from "./postings";
 import { useQuery } from "react-query";
 import { CustomAxios } from "../../utils/customAxios";
 import { useInView } from "react-intersection-observer";
+import { Layout } from "../../components/Layout";
 
 export const Home = () => {
   const user = useRecoilValue(userInfo);
@@ -35,21 +36,13 @@ export const Home = () => {
   }, [inView]);
 
   return (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-      inView={inView}
-    >
+    <Layout style={{ flexDirection: "column" }} inView={inView}>
       {postQuery.isSuccess ? (
         <>
           <Postings posts={posts} />
           <div ref={ref} style={{ marginTop: "-20%" }}></div>
         </>
       ) : null}
-    </div>
+    </Layout>
   );
 };

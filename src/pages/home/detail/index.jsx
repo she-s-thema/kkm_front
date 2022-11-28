@@ -121,7 +121,7 @@ export const PostDetail = () => {
   };
 
   return (
-    <S.Frame>
+    <>
       {dataInfo && postOwnerInfo && (
         <S.ArticleBox>
           <S.UserBox>
@@ -200,6 +200,6 @@ export const PostDetail = () => {
           </S.Article>
         </S.ArticleBox>
       )}
-    </S.Frame>
+    </>
   );
 };
