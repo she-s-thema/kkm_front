@@ -34,10 +34,12 @@ export const Container = styled.div`
 
 export const Article = styled.div`
   display: flex;
+  max-width: 100%;
   width: 100%;
   height: 100%;
   row-gap: 15px;
   flex-direction: column;
+  overflow: hidden;
   justify-content: space-between;
 `;
 
@@ -52,14 +54,19 @@ export const Info = styled.div`
 `;
 
 export const ImageBox = styled.div`
+  display: flex;
+  min-width: 100%;
+  align-items: center;
   width: 100%;
+  aspect-ratio: 4 / 3;
+  transition: all 0.5s ease;
 `;
 
 export const Image = styled.img`
-  display: block;
+  border-radius: 10px;
   aspect-ratio: 4 / 3;
   width: 100%;
-  border-radius: 10px;
+  height: 100%;
   object-fit: contain;
   background-color: black;
 `;
@@ -152,4 +159,21 @@ export const ChatBtn = styled.button`
 
 export const Dot = styled.span`
   margin: 0 5px;
+`;
+
+export const ArrowBox = styled.div`
+  display: flex;
+  position: absolute;
+  z-index: 2;
+  width: 44%;
+  padding: 0 1%;
+  height: 30px;
+  justify-content: space-between;
+`;
+
+export const ImgSlider = styled.div`
+  display: flex;
+  min-width: 100%;
+  align-items: center;
+  height: 100%;
 `;
