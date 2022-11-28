@@ -7,6 +7,7 @@ import {
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 import { MdLocationOn } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -20,15 +21,20 @@ import { timeDifference } from "../../../utils/timeDifference";
 import * as S from "./detail.style";
 
 export const PostDetail = () => {
+  const imgRef = useRef(null);
   const user = useRecoilValue(userInfo);
   const { post_id } = useParams();
+  const [curImgIndex, setCurImgIndex] = useState(1);
+  const [imgMax, setImgMax] = useState(1);
   const [dataInfo, setDataInfo] = useState();
   const [postOwnerInfo, setPostOwnerInfo] = useState();
   const [isHeart, setIsHeart] = useState(false);
-  const [sChannelId, setSChannelId] = useRecoilState(channelId);
+  const [, setSChannelId] = useRecoilState(channelId);
 
   const getDetailInfo = async () => {
     await CustomAxios.get(`/post/getDetail?post_id=${post_id}`).then((data) => {
+      if (data.data["image_2"] !== "") setImgMax(2);
+      if (data.data["image_3"] !== "") setImgMax(3);
       const time = timeDifference(data.data["write_time"]);
       setDataInfo({ ...data.data, write_time: time });
     });
@@ -102,6 +108,18 @@ export const PostDetail = () => {
     getDetailInfo();
   }, [isHeart]);
 
+  const slideImg = (side) => {
+    if (curImgIndex < 4) {
+      if (side) {
+        setCurImgIndex((prev) => prev + 1);
+        imgRef.current.style.transform = `translateX(-${curImgIndex}00%)`;
+      } else {
+        setCurImgIndex((prev) => prev - 1);
+        imgRef.current.style.transform = `translateX(-${curImgIndex - 2}00%)`;
+      }
+    }
+  };
+
   return (
     <S.Frame>
       {dataInfo && postOwnerInfo && (
@@ -122,13 +140,43 @@ export const PostDetail = () => {
             </S.Container>
           </S.UserBox>
           <S.Article>
-            <S.ImageBox>
-              {dataInfo["image_1"] !== "" && (
-                <S.Image src={dataInfo["image_1"]} />
+            <S.ImgSlider>
+              {dataInfo["image_2"] !== "" && (
+                <S.ArrowBox>
+                  <img
+                    src={
+                      curImgIndex !== 1
+                        ? "../../assets/icons/left-arrow.png"
+                        : ""
+                    }
+                    onClick={() => slideImg(false)}
+                  />
+                  <img
+                    src={
+                      curImgIndex !== 3
+                        ? "../../assets/icons/right-arrow.png"
+                        : ""
+                    }
+                    style={{
+                      display:
+                        curImgIndex === 3 || curImgIndex === imgMax
+                          ? "none"
+                          : null,
+                    }}
+                    onClick={() => slideImg(true)}
+                  />
+                </S.ArrowBox>
               )}
-              {/* {dataInfo["image_2"] !== "" && <Image src={dataInfo["image_2"]} />} */}
-              {/* {dataInfo["image_3"] !== "" && <Image src={dataInfo["image_3"]} />} */}
-            </S.ImageBox>
+              <S.ImageBox ref={imgRef}>
+                <S.Image src={dataInfo["image_1"]} />
+                {dataInfo["image_2"] !== "" && (
+                  <S.Image src={dataInfo["image_2"]} />
+                )}
+                {dataInfo["image_3"] !== "" && (
+                  <S.Image src={dataInfo["image_3"]} />
+                )}
+              </S.ImageBox>
+            </S.ImgSlider>
             <S.Head>
               <S.LeftInfoBox>
                 <S.SubInfo>
@@ -144,7 +192,9 @@ export const PostDetail = () => {
             <S.ChatBtn onClick={newChannel}>대화하기</S.ChatBtn>
 
             <S.Line />
-            <S.DescBox>{dataInfo["description"]}</S.DescBox>
+            <S.DescBox
+              dangerouslySetInnerHTML={{ __html: dataInfo["description"] }}
+            ></S.DescBox>
             <S.Line />
             <S.Title>추천 게시물</S.Title>
           </S.Article>
@@ -153,7 +203,3 @@ export const PostDetail = () => {
     </S.Frame>
   );
 };
-
-{
-  /* <S.ChatBtn onClick={newChannel}>대화하기</S.ChatBtn> */
-}
