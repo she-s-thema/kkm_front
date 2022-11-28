@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { Header } from "../components/Header";
 import { Post } from "../pages/write";
-import { Mypage } from "../pages/mypage/Mypage";
+import { Mypage } from "../pages/mypage";
 import { IsLogin } from "../components/IsLogin";
 import { PostDetail } from "../pages/home/detail";
 import { QueryClient, QueryClientProvider } from "react-query";
