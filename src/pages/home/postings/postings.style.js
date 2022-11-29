@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Article = styled.article`
   width: 50%;
   height: 100%;
-  padding: 0 10% 30% 10%;
+  padding: 0 10% 10% 10%;
   background-color: white;
 `;
 
