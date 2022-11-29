@@ -78,6 +78,7 @@ export const PostDetail = () => {
         await setDoc(newChRef, {
           id: newChRef.id,
           createdAt: createdTime,
+          sendAt: createdTime,
           loaner_id: user["user_id"],
           loaner_profile: user["k_img_url"],
           loaner_name: user["nickname"],
