@@ -2,11 +2,13 @@ import {
   collection,
   doc,
   getDoc,
+  getDocs,
   onSnapshot,
   orderBy,
   query,
   setDoc,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import db from "../config/firebaseConfig";
 
@@ -80,6 +82,23 @@ export const getPromises = async (ch_id) => {
       });
     }
   });
+  return result;
+};
+
+export const getUserDeals = async (user_id) => {
+  let result = [];
+  const channelRef = collection(db, "channels");
+  const q = query(channelRef, where("loaner_id", "==", user_id));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    result.push(doc.data());
+  });
+  const q2 = query(channelRef, where("owner_id", "==", user_id));
+  const querySnapshot2 = await getDocs(q);
+  querySnapshot2.forEach((doc) => {
+    result.push(doc.data());
+  });
+
   return result;
 };
 
