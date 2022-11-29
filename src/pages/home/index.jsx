@@ -40,7 +40,7 @@ export const Home = () => {
       {postQuery.isSuccess ? (
         <>
           <Postings posts={posts} />
-          <div ref={ref} style={{ marginTop: "-20%" }}></div>
+          <div ref={ref} style={{ marginTop: "-30%" }}></div>
         </>
       ) : null}
     </Layout>
